@@ -25,11 +25,24 @@ public class PlayerController : MonoBehaviour
         // Player input on the vertical axis
         float verticalInput = Input.GetAxis("Vertical");
 
+        Vector3 direction = new Vector3 (horizontalInput, 0, verticalInput);
+
         // Moves the player character forward or backward depending on the value of verticalInput
-        transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
+        transform.Translate(direction.normalized * speed * Time.deltaTime);
 
         // Moves the player character left or right depending on the value of horizontalInput inverted
-        transform.Translate(Vector3.left * (horizontalInput* -1) * turnSpeed  * Time.deltaTime );
+        //transform.Translate(Vector3.left * (horizontalInput* -1) * turnSpeed  * Time.deltaTime );
+
+        // Schauen ob sich nach vorne oder hinten bewegt wird
+        if (verticalInput != 0)
+        {
+            // Drehung ausrechnen
+            float turnAngle = turnSpeed * horizontalInput * Input.GetAxisRaw("Vertical") * Time.deltaTime;
+            transform.Rotate(Vector3.up, turnAngle);
+        }
+
+
+        transform.Translate(Vector3.left * (horizontalInput * -1) * turnSpeed * Time.deltaTime);
 
     }
 }
