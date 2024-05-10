@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        transform.Translate(Vector3.left * (horizontalInput * -1) * turnSpeed * Time.deltaTime);
+        //transform.Translate(Vector3.left * (horizontalInput * -1) * turnSpeed * Time.deltaTime);
 
     }
 }
