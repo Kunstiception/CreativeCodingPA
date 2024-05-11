@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
     // Turnspeed of the player character
     public float turnSpeed;
 
+    // Angle, in which the player should turn when the input is opposite to its current direction while standing still
     private Quaternion _turnAround = Quaternion.Euler(0f, 180f, 0f);
     
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -27,19 +28,21 @@ public class PlayerController : MonoBehaviour
         // Player input on the vertical axis
         float verticalInput = Input.GetAxis("Vertical");
 
-        // Create a vector called direction by combining the horizontal and vertical input into a Vector3
-        //Vector3 direction = new Vector3 (horizontalInput, 0, verticalInput);
-
         // Moves the player according to the created vector normalized
         transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
-        
-        // Input.GetAxisRaw("Vertical")
-        float turnAngle = turnSpeed * horizontalInput * Time.deltaTime;
-        transform.Rotate(Vector3.up, turnAngle);
 
-        if(verticalInput < 0)
+        // The angle in which the player can turn
+        if(verticalInput != 0f)
         {
-            transform.rotation = _turnAround;
+            float turnAngle = turnSpeed * horizontalInput * Time.deltaTime;
+            transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
+        }
+
+
+        // Makes the player turn when the input is opposite to its current direction while standing still
+        //if (verticalInput < 0)
+        {
+            //transform.rotation = _turnAround;
         }
      
         
