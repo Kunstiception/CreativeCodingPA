@@ -10,15 +10,11 @@ public class PlayerController : MonoBehaviour
     // Turnspeed of the player character
     public float turnSpeed;
 
+    public float verticalInput;
+
     // Angle, in which the player should turn when the input is opposite to its current direction while standing still
     private Quaternion _turnAround = Quaternion.Euler(0f, 180f, 0f);
     
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -26,23 +22,36 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
 
         // Player input on the vertical axis
-        float verticalInput = Input.GetAxis("Vertical");
+        verticalInput = Input.GetAxis("Vertical");
 
         // Moves the player according to the created vector normalized
         transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
 
-        // The angle in which the player can turn
+        
         if(verticalInput != 0f)
         {
+            // The angle in which the player can turn
             float turnAngle = turnSpeed * horizontalInput * Time.deltaTime;
-            transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
+            // If the player moves backward, then invert the turn angle
+            if (verticalInput < 0f)
+            {
+                transform.Rotate(Vector3.up, turnAngle * -1 * turnSpeed * Time.deltaTime);
+            }
+            // otherwise do not invert the turn angle
+            else
+            {
+                transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
+            }
+        }
+        {
+            
         }
 
 
         // Makes the player turn when the input is opposite to its current direction while standing still
-        //if (verticalInput < 0)
+        if (verticalInput < 0 && verticalInput == 0)
         {
-            //transform.rotation = _turnAround;
+            transform.rotation = _turnAround;
         }
      
         
