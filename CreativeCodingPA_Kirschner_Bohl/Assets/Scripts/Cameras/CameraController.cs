@@ -25,14 +25,15 @@ public class CameraController : MonoBehaviour
     {
         // store the current vertical input
         _verticalInput = playerController.verticalInput;
-
+        // If vertical Input euqals 0 (no movement), switch to idle camera / The wait time is handled in the State Driven Camera-Settings
         if (_verticalInput == 0)
         {
-            _animator.SetInteger("CameraIndex", 0);
+            _animator.SetInteger("CameraIndex", 1);
         }
+        // Else the active camera is the movement camera
         else
         {
-            _animator.SetInteger("CameraIndex", 1);
+            _animator.SetInteger("CameraIndex", 0);
         }
             
     }
