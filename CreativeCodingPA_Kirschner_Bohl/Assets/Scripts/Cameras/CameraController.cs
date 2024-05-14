@@ -10,6 +10,9 @@ public class CameraController : MonoBehaviour
     // Stores the current vertical input
     private float _verticalInput;
 
+    // Stores the current horizontal input
+    private float _horizontalInput;
+
     // Reference to the animator
     private Animator _animator;
     
@@ -25,8 +28,12 @@ public class CameraController : MonoBehaviour
     {
         // store the current vertical input
         _verticalInput = playerController.verticalInput;
-        // If vertical Input euqals 0 (no movement), switch to idle camera / The wait time is handled in the State Driven Camera-Settings
-        if (_verticalInput == 0)
+
+        // store the current vertical input
+        _horizontalInput = playerController.horizontalInput;
+
+        // If both vertical and horizontal inputs euqal 0 (no movement), switch to idle camera / The wait time is handled in the State Driven Camera-Settings
+        if (_verticalInput == 0 && _horizontalInput == 0)
         {
             _animator.SetInteger("CameraIndex", 1);
         }
