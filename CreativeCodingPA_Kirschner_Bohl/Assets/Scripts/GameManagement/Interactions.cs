@@ -12,7 +12,12 @@ public class Interactions : MonoBehaviour
     public float speed = 1.5f;
     public bool hasInteracted = false;
     public TextMeshProUGUI text;
+    private Vector3 offset;
 
+    private void Start()
+    {
+        offset = player.transform.position * -0.1f;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,6 +45,7 @@ public class Interactions : MonoBehaviour
         if (hasInteracted == true)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            transform.position = player.transform.position - offset;
         }
     }
 }
