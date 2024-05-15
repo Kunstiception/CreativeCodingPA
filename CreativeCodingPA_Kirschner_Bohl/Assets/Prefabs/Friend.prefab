@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 1435004133959510400}
   - component: {fileID: 6116785076147204797}
   - component: {fileID: 2109934880427005721}
-  - component: {fileID: 2809250757662727031}
+  - component: {fileID: 6246193395929316808}
   m_Layer: 0
   m_Name: Friend
   m_TagString: Friend
@@ -219,7 +219,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2809250757662727031
+--- !u!114 &6246193395929316808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,15 +228,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7179315775078766074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 915d1fa4f2c813d449acccb24337a8a5, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ad263975b9597479d6d3407c17144c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isClose: 0
   player: {fileID: 0}
-  speed: 1.5
+  speed: 5
   hasInteracted: 0
-  text: {fileID: 1587395860611432972}
-  collectedFriends: 0
+  text: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &8769686560714969750
 GameObject:
   m_ObjectHideFlags: 0
