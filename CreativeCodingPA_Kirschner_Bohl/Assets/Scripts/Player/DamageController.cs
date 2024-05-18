@@ -13,6 +13,9 @@ public class DamageController : MonoBehaviour
     // The color to indicate that the health of the player is looking bad
     public Color deathColor;
 
+    // A boolean indicating if the player has full health
+    public bool isFullHealth;
+
     // Reference to the renderer of the child game object
     private Renderer _renderer;
 
@@ -49,7 +52,7 @@ public class DamageController : MonoBehaviour
         // Checks if the player is near a lightsource, if false life points are subtracted
         if (inLight == false)
         {
-            _lifeChange = 0.2f;
+            _lifeChange = 0.15f;
         }
 
         // if true, life points are added, which happens at twice the speed as the subtraction of life points
@@ -71,6 +74,16 @@ public class DamageController : MonoBehaviour
         if (_lifePoints >= 1f)
         {
             print("Game Over!");
+        }
+
+        else if (_lifePoints <= 0f)
+        {
+            isFullHealth = true;
+        }
+
+        else
+        {
+            isFullHealth = false;
         }
     }
 }

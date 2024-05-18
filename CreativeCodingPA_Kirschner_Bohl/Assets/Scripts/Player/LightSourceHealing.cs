@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class LightSourceHealing : MonoBehaviour
 {
+    // Reference to the Lightsource belonging to this collider
+    public Light _correspondingLightsource;
+    
     // Reference to the player object
     private GameObject _player;
 
+    // Reference to the damage controller script
     private DamageController _damageController;
     
     // Start is called before the first frame update
@@ -22,6 +26,13 @@ public class LightSourceHealing : MonoBehaviour
         if (other.gameObject == _player)
         {
             _damageController.inLight = true;
+        }
+
+        if(other.gameObject == _player && _damageController.isFullHealth == true)
+        {
+            _damageController.inLight = false;
+            _correspondingLightsource.enabled = false;
+            Destroy(gameObject);
         }
     }
 
