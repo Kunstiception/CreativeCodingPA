@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
+    // Speed of the player character
+    public float speed;
 
     // Turnspeed of the player character
     public float turnSpeed;
@@ -19,21 +21,20 @@ public class PlayerController : MonoBehaviour
     // Angle, in which the player should turn when the input is opposite to its current direction while standing still
     private Quaternion _turnAround = Quaternion.Euler(0f, 180f, 0f);
 
-    // Speed of the player character
-    private float speed;
+    // References the Speedboost Script
+    private SpeedBoost _speedBoost;
 
-    //How long has the player been boosted for
+    // References the Object with the Speedboost Script attached to it
+    private GameObject _boost;
+
+    // How long has the player been boosted for
     private float boostTime;
 
-    //Checks if the player is boosted or not
-    private bool isBoosted;
 
     private void Start()
     {
-        //Default state of the player when not boosted
-        speed = 6;
-        boostTime = 0;
-        isBoosted = false;
+        //Gets the Speedboost Script 
+        _speedBoost = GameObject.Find("Boost").GetComponent<SpeedBoost>();
     }
 
     // Update is called once per frame
@@ -71,30 +72,17 @@ public class PlayerController : MonoBehaviour
         }
 
         // How long is the player being boosted for
-        if (isBoosted)
+        if (_speedBoost.isBoosted == true)
         {
             boostTime += Time.deltaTime;
-            
+
             if (boostTime >= 3)
             {
                 speed = 6;
                 boostTime = 0;
-                isBoosted = false;
+                _speedBoost.isBoosted = false;
             }
         }
-
-    // Boost when player touches the speedboost object; also destroys it
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Boost")
-        {
-            isBoosted = true;
-            speed = 12;
-            Destroy(gameObject);
-        }
-    }
-
-
 
         // Makes the player turn when the input is opposite to its current direction while standing still
         /*if (verticalInput < 0 && verticalInput == 0)
