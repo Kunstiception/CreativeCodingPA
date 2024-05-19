@@ -4669,6 +4669,7 @@ MonoBehaviour:
   - {fileID: 1050959876}
   - {fileID: 391975886}
   - {fileID: 1846048663}
+  waitTime: 10
 --- !u!43 &1001254886
 Mesh:
   m_ObjectHideFlags: 0
