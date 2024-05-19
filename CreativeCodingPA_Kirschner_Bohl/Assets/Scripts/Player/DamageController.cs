@@ -73,7 +73,7 @@ public class DamageController : MonoBehaviour
 
         if (_lifePoints >= 1f)
         {
-            print("Game Over!");
+            // print("Game Over!");
         }
 
         else if (_lifePoints <= 0f)
