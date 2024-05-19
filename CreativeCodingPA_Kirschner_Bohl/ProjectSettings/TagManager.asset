@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Friend
+  - Boost
   layers:
   - Default
   - TransparentFX
