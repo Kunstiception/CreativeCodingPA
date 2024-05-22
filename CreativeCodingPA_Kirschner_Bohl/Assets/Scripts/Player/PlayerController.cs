@@ -56,17 +56,17 @@ public class PlayerController : MonoBehaviour
         if (verticalInput == 0f)
         {
 
-            // As long as the player doesnt move vertically: Moves the player left or right depending on the horizontal input
-            transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);
+            // As long as the player doesnt move vertically: Rotating the character is allowed
+            transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
         }
 
-        // If the player moves backward, then invert the turn angle and no direct movement to left or right is possible
+        // If the player moves backward, then invert the turn angle
         else if (verticalInput < 0f)
         {
             transform.Rotate(Vector3.up, turnAngle * -1 * turnSpeed * Time.deltaTime);
         }
-        // otherwise do not invert the turn angle and no direct movement to left or right is possible
-        else
+        // otherwise do not invert the turn angle
+        else if (verticalInput > 0f)
         {
             transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
         }
@@ -82,13 +82,6 @@ public class PlayerController : MonoBehaviour
                 boostTime = 0;
                 _speedBoost.isBoosted = false;
             }
-        }
-
-        // Makes the player turn when the input is opposite to its current direction while standing still
-        /*if (verticalInput < 0 && verticalInput == 0)
-        {
-            transform.rotation = _turnAround;
-        }
-        */
+        }   
     }
 }
