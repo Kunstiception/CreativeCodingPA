@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // A bool to describe if the player is curently jumping or not
+    public bool isJumping;
 
     // Speed of the player character
     public float speed;
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         //Gets the Speedboost Script 
         _speedBoost = GameObject.Find("Boost").GetComponent<SpeedBoost>();
+
     }
 
     // Update is called once per frame
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
         // The angle in which the player can turn
         float turnAngle = turnSpeed * horizontalInput * Time.deltaTime;
 
+
         // Moves the player forward or backward depending on the vertical input
         transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime);
 
@@ -56,20 +60,20 @@ public class PlayerController : MonoBehaviour
         if (verticalInput == 0f)
         {
 
-            // As long as the player doesnt move vertically: Rotating the character is allowed
-            transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
+        // As long as the player doesnt move vertically: Rotating the character is allowed
+        transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
         }
 
         // If the player moves backward, then invert the turn angle
         else if (verticalInput < 0f)
         {
-            transform.Rotate(Vector3.up, turnAngle * -1 * turnSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, turnAngle * -1 * turnSpeed * Time.deltaTime);
         }
         // otherwise do not invert the turn angle
-        else if (verticalInput > 0f)
-        {
+            else if (verticalInput > 0f)
+            {
             transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
-        }
+            }
 
         // How long is the player being boosted for
         if (_speedBoost.isBoosted == true)
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviour
                 boostTime = 0;
                 _speedBoost.isBoosted = false;
             }
-        }   
+        } 
+          
     }
 }

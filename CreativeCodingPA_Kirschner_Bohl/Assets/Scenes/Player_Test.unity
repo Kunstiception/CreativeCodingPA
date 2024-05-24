@@ -35483,6 +35483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpStrength: 20
+  isJumping: 0
 --- !u!65 &1760792647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39775,6 +39776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850196e92aa1a9b4ebee9ec7466c50aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJumping: 0
   speed: 6
   turnSpeed: 180
   verticalInput: 0
