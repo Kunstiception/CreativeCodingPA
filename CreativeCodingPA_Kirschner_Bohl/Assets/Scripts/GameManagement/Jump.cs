@@ -32,10 +32,10 @@ public class Jump : MonoBehaviour
 
     private void Update()
     {
-        if (isJumping && Input.GetKeyDown(KeyCode.Space))
+        if (isJumping)
         {
             _playerRB.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
- 
+            isJumping = false;
         }
 
     }

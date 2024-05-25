@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         //Gets the Speedboost Script 
-        _speedBoost = GameObject.Find("Boost").GetComponent<SpeedBoost>();
+        _speedBoost = GameObject.Find("Boost 1").GetComponent<SpeedBoost>();
 
     }
 
