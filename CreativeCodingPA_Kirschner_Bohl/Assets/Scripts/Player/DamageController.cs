@@ -16,6 +16,12 @@ public class DamageController : MonoBehaviour
     // A boolean indicating if the player has full health
     public bool isFullHealth;
 
+    // Particle system for when player is receiving damage
+    public ParticleSystem losingLightParticles;
+
+    // Particle system for when playser is in light
+    public ParticleSystem recievingLightParticles;
+
     // Reference to the renderer of the child game object
     private Renderer _renderer;
 
@@ -44,6 +50,7 @@ public class DamageController : MonoBehaviour
         
         // Sets the lifepoints to the 0f, which means the emission color is white, indicating full health
         _lifePoints = 0f;
+
     }
 
     // Update is called once per frame
@@ -53,12 +60,15 @@ public class DamageController : MonoBehaviour
         if (inLight == false)
         {
             _lifeChange = 0.15f;
+            losingLightParticles.Play();
         }
 
         // if true, life points are added, which happens at twice the speed as the subtraction of life points
         else
         {
             _lifeChange = -0.4f;
+            recievingLightParticles.Play();
+
         }
 
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
