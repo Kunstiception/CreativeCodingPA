@@ -60,16 +60,17 @@ public class DamageController : MonoBehaviour
         if (inLight == false)
         {
             _lifeChange = 0.15f;
-            losingLightParticles.Play();
+            recievingLightParticles.Play();
         }
 
         // if true, life points are added, which happens at twice the speed as the subtraction of life points
         else
         {
             _lifeChange = -0.4f;
-            recievingLightParticles.Play();
-
+            losingLightParticles.Play();
         }
+
+
 
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
         // Lerps between two colors to signal the player's health
@@ -89,6 +90,7 @@ public class DamageController : MonoBehaviour
         else if (_lifePoints <= 0f)
         {
             isFullHealth = true;
+
         }
 
         else
