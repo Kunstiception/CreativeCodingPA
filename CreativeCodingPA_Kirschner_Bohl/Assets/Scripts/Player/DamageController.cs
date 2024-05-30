@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DamageController : MonoBehaviour
 {
+    // The rate at which life points are increased
+    public float increaseLifePoints;
+
+    // The rate at which life points are decreased
+    public float decreaseLifePoints;
+    
     // A bool to show if the player is near a lightsource or not
     public bool inLight;
 
@@ -31,8 +37,10 @@ public class DamageController : MonoBehaviour
     // The current color to be applied to the material
     private Color _currentColor;
 
+    // The life points of the player character represented by its color
     private float _lifePoints;
 
+    // The rate at which the life points change on update
     private float _lifeChange;
 
     
@@ -51,6 +59,9 @@ public class DamageController : MonoBehaviour
         // Sets the lifepoints to the 0f, which means the emission color is white, indicating full health
         _lifePoints = 0f;
 
+        losingLightParticles.gameObject.SetActive(false);
+        recievingLightParticles.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -59,15 +70,18 @@ public class DamageController : MonoBehaviour
         // Checks if the player is near a lightsource, if false life points are subtracted
         if (inLight == false)
         {
-            _lifeChange = 0.15f;
-            recievingLightParticles.Play();
+            _lifeChange = decreaseLifePoints;
+            losingLightParticles.gameObject.SetActive(true);
+            recievingLightParticles.gameObject.SetActive(false);
+            
         }
 
         // if true, life points are added, which happens at twice the speed as the subtraction of life points
-        else
+        else if (inLight == true)
         {
-            _lifeChange = -0.4f;
-            losingLightParticles.Play();
+            _lifeChange = increaseLifePoints;
+            recievingLightParticles.gameObject.SetActive(true);
+            losingLightParticles.gameObject.SetActive(false);
         }
 
 

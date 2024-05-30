@@ -44814,6 +44814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecda7aa2c0f5da47b401fc9c9b59c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  increaseLifePoints: -0.4
+  decreaseLifePoints: 0.2
   inLight: 0
   healthyColor: {r: 1, g: 1, b: 1, a: 0}
   deathColor: {r: 0, g: 0, b: 0, a: 0}
