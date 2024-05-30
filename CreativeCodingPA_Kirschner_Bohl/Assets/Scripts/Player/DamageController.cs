@@ -50,7 +50,6 @@ public class DamageController : MonoBehaviour
         // Gets the renderer of the child object
         _renderer = GetComponentInChildren<Renderer>();
 
-
         // https://docs.unity3d.com/ScriptReference/Renderer-material.html
         // Gets the material of that renderer
         _playerMaterial = _renderer.GetComponent<Renderer>().material;
@@ -76,7 +75,7 @@ public class DamageController : MonoBehaviour
             
         }
 
-        // if true, life points are added, which happens at twice the speed as the subtraction of life points
+        // if true, life points are added
         else if (inLight == true)
         {
             _lifeChange = increaseLifePoints;
@@ -96,17 +95,19 @@ public class DamageController : MonoBehaviour
         // The current color is set to be the emission color
         _playerMaterial.SetColor("_EmissionColor", _currentColor);
 
+        // If life points hit 1 (the death color is reached), print game over
         if (_lifePoints >= 1f)
         {
-            // print("Game Over!");
+            print("Game Over!");
         }
 
+        // Else if the healthy color is reached, set isFullHealth to true
         else if (_lifePoints <= 0f)
         {
             isFullHealth = true;
 
         }
-
+        // Else set it to false
         else
         {
             isFullHealth = false;
