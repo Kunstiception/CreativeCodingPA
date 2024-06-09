@@ -22,30 +22,12 @@ public class CameraController : MonoBehaviour
  // Start is called before the first frame update
  void Start()
     {
-        // Stores the animator component
-        _animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // store the current vertical input
-        _verticalInput = playerController.verticalInput;
-
-        // store the current vertical input
-        _horizontalInput = playerController.horizontalInput;
-
-        // If both vertical and horizontal inputs euqal 0 (no movement), switch to idle camera / The wait time is handled in the State Driven Camera-Settings
-        if (_verticalInput == 0 && _horizontalInput == 0)
-        {
-            _animator.SetInteger("CameraIndex", 1);
-        }
-        // Else the active camera is the movement camera
-        else
-        {
-            _animator.SetInteger("CameraIndex", 0);
-
-        }
 
     }
 }
