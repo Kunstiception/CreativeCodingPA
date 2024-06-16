@@ -28,6 +28,8 @@ public class DamageController : MonoBehaviour
     // Particle system for when playser is in light
     public ParticleSystem recievingLightParticles;
 
+    public GameObject gameOverUI;
+
     // Reference to the renderer of the child game object
     private Renderer _renderer;
 
@@ -99,6 +101,7 @@ public class DamageController : MonoBehaviour
         if (_lifePoints >= 1f)
         {
             print("Game Over!");
+            gameOverUI.SetActive(true);
         }
 
         // Else if the healthy color is reached, set isFullHealth to true
