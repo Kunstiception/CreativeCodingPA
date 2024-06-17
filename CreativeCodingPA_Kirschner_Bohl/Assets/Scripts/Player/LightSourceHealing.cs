@@ -17,6 +17,7 @@ public class LightSourceHealing : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player");
+        _damageController = _player.GetComponent<DamageController>();
     }
 
     private void OnTriggerStay(Collider other)
