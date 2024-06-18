@@ -14,10 +14,10 @@ public class DamageController : MonoBehaviour
     public bool inLight;
 
     // The color to indicate that the health of the player is looking good
-    public Color healthyColor;
+    public Color deathColor;
 
     // The color to indicate that the health of the player is looking bad
-    public Color deathColor;
+    public Color healthyColor;
 
     // A boolean indicating if the player has full health
     public bool isFullHealth;
@@ -28,7 +28,9 @@ public class DamageController : MonoBehaviour
     // Particle system for when playser is in light
     public ParticleSystem recievingLightParticles;
 
-    public GameObject gameOverUI;
+
+    // The life points of the player character represented by its color
+    public float _lifePoints;
 
     // Reference to the renderer of the child game object
     private Renderer _renderer;
@@ -39,8 +41,7 @@ public class DamageController : MonoBehaviour
     // The current color to be applied to the material
     private Color _currentColor;
 
-    // The life points of the player character represented by its color
-    private float _lifePoints;
+    
 
     // The rate at which the life points change on update
     private float _lifeChange;
@@ -57,8 +58,8 @@ public class DamageController : MonoBehaviour
         _playerMaterial = _renderer.GetComponent<Renderer>().material;
         print(_playerMaterial);
         
-        // Sets the lifepoints to the 0f, which means the emission color is white, indicating full health
-        _lifePoints = 0f;
+        // Sets the lifepoints to the 1f, which means the emission color is white, indicating full health
+        _lifePoints = 1f;
 
         losingLightParticles.gameObject.SetActive(false);
         recievingLightParticles.gameObject.SetActive(false);
@@ -89,7 +90,7 @@ public class DamageController : MonoBehaviour
 
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
         // Lerps between two colors to signal the player's health
-        _currentColor = Color.Lerp(healthyColor, deathColor, _lifePoints);
+        _currentColor = Color.Lerp(deathColor, healthyColor,  _lifePoints);
         // https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
         // Increases the the interpolation by a fixed value multiplied by time.deltaTime
         _lifePoints += (_lifeChange * Time.deltaTime);
@@ -98,14 +99,13 @@ public class DamageController : MonoBehaviour
         _playerMaterial.SetColor("_EmissionColor", _currentColor);
 
         // If life points hit 1 (the death color is reached), print game over
-        if (_lifePoints >= 1f)
+        if (_lifePoints <= 0f)
         {
-            print("Game Over!");
-            gameOverUI.SetActive(true);
+            
         }
 
         // Else if the healthy color is reached, set isFullHealth to true
-        else if (_lifePoints <= 0f)
+        else if (_lifePoints >= 1f)
         {
             isFullHealth = true;
 

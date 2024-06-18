@@ -26,6 +26,9 @@ public class CameraController : MonoBehaviour
     // A bool to descibe the current state of idleCam's X axis and to prevent it from being reset on every frame
     private bool _isMoveCamFixed;
 
+    //Reference to the UIManager
+    private UIManager _uiManager;
+
 
  // Start is called before the first frame update
  void Start()
@@ -39,29 +42,36 @@ public class CameraController : MonoBehaviour
         // Get move camera
         _moveCam = GameObject.Find("State-Driven Camera").GetComponentInChildren<CinemachineVirtualCamera>();
 
+        // Get UI Manager
+        _uiManager = GameObject.Find("GameManager").GetComponent<UIManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if the player does not move, switch to idle cam
-        if (playerController.verticalInput == 0 && playerController.horizontalInput == 0)
+        if (_uiManager.isGameOver == false)
         {
+            // if the player does not move, switch to idle cam
+            if (playerController.verticalInput == 0 && playerController.horizontalInput == 0)
+            {
             _animator.SetBool("isMoving", false);
-            // reset the free loook cameras x axis value to 0, so it is centered behind the player when the camera is entered
+            // reset the free look cameras x axis value to 0, so it is centered behind the player when the camera is entered
             if (_isMoveCamFixed == false)
             {
                 ResetIdleCam();
             }
             
             
-        }
-        // else switch to move cam and set _isMoveCamFixed to false
-        else
-        {
+            }
+            // else switch to move cam and set _isMoveCamFixed to false
+            else
+            {
             _animator.SetBool("isMoving", true);
             _isMoveCamFixed = false;
+            }
         }
+       
     }
 
     // Resets the idleCam's X value to 0, so it starts behind the player not anywhere else, also reset the corresponding bool so this only happens once

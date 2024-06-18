@@ -2697,6 +2697,7 @@ GameObject:
   - component: {fileID: 156481593}
   - component: {fileID: 156481591}
   - component: {fileID: 156481592}
+  - component: {fileID: 156481595}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2764,6 +2765,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 577538495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &156481595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156481590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7693e33e1df154eb76fbfd898ff5b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 1930776944}
+  isGameOver: 0
 --- !u!43 &159478095
 Mesh:
   m_ObjectHideFlags: 0
@@ -20249,7 +20264,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 833739742}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 156481595}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: BackToTitle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &833739742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29655,7 +29682,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258276073}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29113963, y: -1e-45, z: -0, w: 0.9566806}
+  m_LocalRotation: {x: 0.29113963, y: 1e-45, z: -0, w: 0.9566806}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32388,7 +32415,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1382004363}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 156481595}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1382004363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35523,7 +35562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521235446}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32569888, y: 1e-45, z: -1e-45, w: 0.94547355}
+  m_LocalRotation: {x: 0.32569888, y: -6e-45, z: 4e-45, w: 0.94547355}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40252,7 +40291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664590945}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3084473, y: -0.000000023147033, z: 0.0000000075056015, w: 0.95124143}
+  m_LocalRotation: {x: 0.3084473, y: 0.000000023147367, z: -0.000000007505711, w: 0.95124143}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44624,15 +44663,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecda7aa2c0f5da47b401fc9c9b59c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  increaseLifePoints: -0.4
-  decreaseLifePoints: 0.12
+  increaseLifePoints: 0.4
+  decreaseLifePoints: -0.12
   inLight: 0
-  healthyColor: {r: 1, g: 1, b: 1, a: 0}
   deathColor: {r: 0, g: 0, b: 0, a: 0}
+  healthyColor: {r: 1, g: 1, b: 1, a: 0}
   isFullHealth: 0
   losingLightParticles: {fileID: 790569029}
   recievingLightParticles: {fileID: 2138707014}
-  gameOverUI: {fileID: 1930776944}
+  _lifePoints: 1
 --- !u!54 &1886946024
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47878,7 +47917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095744275}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3084473, y: -0.00000004629406, z: 0.000000015011203, w: 0.95124143}
+  m_LocalRotation: {x: 0.3084473, y: 0.00000004629423, z: -0.000000015011256, w: 0.95124143}
   m_LocalPosition: {x: 1.2286891, y: 6.0419564, z: -26.691378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
