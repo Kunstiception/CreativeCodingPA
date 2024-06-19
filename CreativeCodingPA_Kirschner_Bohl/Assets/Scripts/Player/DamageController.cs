@@ -98,14 +98,8 @@ public class DamageController : MonoBehaviour
         // The current color is set to be the emission color
         _playerMaterial.SetColor("_EmissionColor", _currentColor);
 
-        // If life points hit 1 (the death color is reached), print game over
-        if (_lifePoints <= 0f)
-        {
-            
-        }
-
         // Else if the healthy color is reached, set isFullHealth to true
-        else if (_lifePoints >= 1f)
+        if (_lifePoints >= 1f)
         {
             isFullHealth = true;
 
