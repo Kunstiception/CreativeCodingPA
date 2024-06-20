@@ -8,7 +8,9 @@ public class FriendManager : MonoBehaviour
 {
 
     // An array storing all the collectible friends
-    public GameObject []Friends;
+    public GameObject[] Friends;
+
+    public int FriendIndex;
 
     // Reference to the MoveFriends script
     private MoveFriends _moveFriends;
@@ -16,16 +18,19 @@ public class FriendManager : MonoBehaviour
     // The offset of the friends on the z-axis
     private float zOffset;
 
+    // Reference to the friends dispay script
+    private FriendsDisplay _friendsDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _friendsDisplay = GameObject.Find("Friends_Grid").GetComponent<FriendsDisplay>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void AssignOffset(GameObject friend)
@@ -38,7 +43,8 @@ public class FriendManager : MonoBehaviour
             // https://learn.microsoft.com/en-us/dotnet/api/system.array.indexof?view=net-8.0#system-array-indexof(system-array-system-object)
             // Get the index of the given object in the array
             int index = Array.IndexOf(Friends, friend);
-            
+
+            _friendsDisplay.ShowFriend(index);
             
             if(index < 0 )
             {
