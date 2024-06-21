@@ -28,20 +28,17 @@ public class DamageController : MonoBehaviour
     // Particle system for when playser is in light
     public ParticleSystem recievingLightParticles;
 
-
     // The life points of the player character represented by its color
     public float _lifePoints;
+
+    // The current color to be applied to the material
+    public Color currentColor;
 
     // Reference to the renderer of the child game object
     private Renderer _renderer;
 
     // The material of that renderer
     private Material _playerMaterial;
-
-    // The current color to be applied to the material
-    private Color _currentColor;
-
-    
 
     // The rate at which the life points change on update
     private float _lifeChange;
@@ -90,13 +87,13 @@ public class DamageController : MonoBehaviour
 
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
         // Lerps between two colors to signal the player's health
-        _currentColor = Color.Lerp(deathColor, healthyColor,  _lifePoints);
+        currentColor = Color.Lerp(deathColor, healthyColor,  _lifePoints);
         // https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
         // Increases the the interpolation by a fixed value multiplied by time.deltaTime
         _lifePoints += (_lifeChange * Time.deltaTime);
         // https://docs.unity3d.com/ScriptReference/Material.SetColor.html#:~:text=Use%20SetColor%20to%20change%20the,were%20not%20previously%20in%20use.
         // The current color is set to be the emission color
-        _playerMaterial.SetColor("_EmissionColor", _currentColor);
+        _playerMaterial.SetColor("_EmissionColor", currentColor);
 
         // Else if the healthy color is reached, set isFullHealth to true
         if (_lifePoints >= 1f)

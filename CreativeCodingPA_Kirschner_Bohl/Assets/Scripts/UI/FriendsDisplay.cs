@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FriendsDisplay : MonoBehaviour
 {
-    public GameObject[] Friends;
+    public GameObject[] friends;
 
     public Color inactiveColor;
 
@@ -27,7 +27,7 @@ public class FriendsDisplay : MonoBehaviour
 
     public void ResetFriends()
     {
-        foreach (var friend in Friends)
+        foreach (var friend in friends)
         {
             friend.GetComponent<Image>().color = inactiveColor;
         }
@@ -35,6 +35,6 @@ public class FriendsDisplay : MonoBehaviour
 
     public void ShowFriend(int index)
     {
-        Friends[index].GetComponent<Image>().color = activeColor;
+        friends[index].GetComponent<Image>().color = activeColor;
     }
 }
