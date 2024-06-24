@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DamageController : MonoBehaviour
@@ -34,6 +35,9 @@ public class DamageController : MonoBehaviour
     // The current color to be applied to the material
     public Color currentColor;
 
+    // Time after being fully reacharged where the player doesnt lose any health
+    public int InvincibilityTime;
+
     // Reference to the renderer of the child game object
     private Renderer _renderer;
 
@@ -42,6 +46,12 @@ public class DamageController : MonoBehaviour
 
     // The rate at which the life points change on update
     private float _lifeChange;
+
+    // Extra variable to set the lifechange to 0
+    private float _fullChargeLifechange = 0;
+
+    // Bool to describe if the player can take damage
+    private bool _isInvincible;
 
     
     // Start is called before the first frame update
@@ -66,6 +76,8 @@ public class DamageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(isFullHealth);
+        
         // Checks if the player is near a lightsource, if false life points are subtracted
         if (inLight == false)
         {
@@ -83,14 +95,17 @@ public class DamageController : MonoBehaviour
             losingLightParticles.gameObject.SetActive(false);
         }
 
-
-
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
         // Lerps between two colors to signal the player's health
         currentColor = Color.Lerp(deathColor, healthyColor,  _lifePoints);
         // https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
+        
         // Increases the the interpolation by a fixed value multiplied by time.deltaTime
-        _lifePoints += (_lifeChange * Time.deltaTime);
+        if (_isInvincible == false)
+        {
+            _lifePoints += (_lifeChange * Time.deltaTime);
+        }
+        
         // https://docs.unity3d.com/ScriptReference/Material.SetColor.html#:~:text=Use%20SetColor%20to%20change%20the,were%20not%20previously%20in%20use.
         // The current color is set to be the emission color
         _playerMaterial.SetColor("_EmissionColor", currentColor);
@@ -98,13 +113,24 @@ public class DamageController : MonoBehaviour
         // Else if the healthy color is reached, set isFullHealth to true
         if (_lifePoints >= 1f)
         {
+            StartCoroutine(FullCharge());
             isFullHealth = true;
+        }        
 
-        }
         // Else set it to false
         else
         {
             isFullHealth = false;
         }
+    }
+
+    IEnumerator FullCharge()
+    {
+        _isInvincible = true;
+        _lifeChange = _fullChargeLifechange;
+        // https://docs.unity3d.com/ScriptReference/WaitForSeconds.html
+        yield return new WaitForSeconds(InvincibilityTime);
+        _lifeChange = decreaseLifePoints;
+        _isInvincible = false;
     }
 }
