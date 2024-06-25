@@ -12,7 +12,7 @@ public class DamageController : MonoBehaviour
     public float decreaseLifePoints;
     
     // A bool to show if the player is near a lightsource or not
-    public bool inLight;
+    public bool isInLight;
 
     // The color to indicate that the health of the player is looking good
     public Color deathColor;
@@ -79,7 +79,7 @@ public class DamageController : MonoBehaviour
         print(isFullHealth);
         
         // Checks if the player is near a lightsource, if false life points are subtracted
-        if (inLight == false)
+        if (!isInLight)
         {
             _lifeChange = decreaseLifePoints;
             losingLightParticles.gameObject.SetActive(true);
@@ -88,12 +88,16 @@ public class DamageController : MonoBehaviour
         }
 
         // if true, life points are added
-        else if (inLight == true)
+        else
         {
             _lifeChange = increaseLifePoints;
             recievingLightParticles.gameObject.SetActive(true);
             losingLightParticles.gameObject.SetActive(false);
         }
+
+        //_lifeChange = isInLight ? increaseLifePoints : decreaseLifePoints;
+        //recievingLightParticles.gameObject.SetActive(isInLight);
+        //losingLightParticles.gameObject.SetActive(!isInLight);
 
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
         // Lerps between two colors to signal the player's health

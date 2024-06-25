@@ -24,12 +24,12 @@ public class LightSourceHealing : MonoBehaviour
     {
         if (other.gameObject == _player)
         {
-            _damageController.inLight = true;
+            _damageController.isInLight = true;
         }
 
         if(other.gameObject == _player && _damageController.isFullHealth == true)
         {
-            _damageController.inLight = false;
+            _damageController.isInLight = false;
             _correspondingLightsource.enabled = false;
             Destroy(gameObject);
         }
@@ -37,7 +37,7 @@ public class LightSourceHealing : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        _damageController.inLight = false;
+        _damageController.isInLight = false;
     }
 
 }

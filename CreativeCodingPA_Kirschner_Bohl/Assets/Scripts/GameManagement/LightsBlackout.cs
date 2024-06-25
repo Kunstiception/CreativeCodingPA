@@ -6,7 +6,7 @@ using UnityEngine;
 public class LightsBlackout : MonoBehaviour
 {
     // All lightsources in an array
-    public Light []Lights;
+    public Light[] Lights;
 
     // The time between the blackouts
     public float waitTime;
@@ -25,6 +25,7 @@ public class LightsBlackout : MonoBehaviour
 
     void Update()
     {
+        
         // https://docs.unity3d.com/ScriptReference/Time-deltaTime.html
         // On update the timer adds Time.deltaTime
         _blackoutTimer += Time.deltaTime;
