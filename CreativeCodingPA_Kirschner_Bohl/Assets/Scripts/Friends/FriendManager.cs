@@ -10,7 +10,8 @@ public class FriendManager : MonoBehaviour
     // An array storing all the collectible friends
     public GameObject[] Friends;
 
-    public int FriendIndex;
+    // Index of the current friend
+    public int friendIndex;
 
     // Reference to the MoveFriends script
     private MoveFriends _moveFriends;
@@ -43,6 +44,8 @@ public class FriendManager : MonoBehaviour
             // https://learn.microsoft.com/en-us/dotnet/api/system.array.indexof?view=net-8.0#system-array-indexof(system-array-system-object)
             // Get the index of the given object in the array
             int index = Array.IndexOf(Friends, friend);
+
+            friendIndex = index;
 
             _friendsDisplay.ShowFriend(index);
             

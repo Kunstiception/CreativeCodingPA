@@ -38,6 +38,9 @@ public class DamageController : MonoBehaviour
     // Time after being fully reacharged where the player doesnt lose any health
     public int InvincibilityTime;
 
+    // The number of collected friends
+    public int numberOfFriends;
+
     // Reference to the renderer of the child game object
     private Renderer _renderer;
 
@@ -53,21 +56,29 @@ public class DamageController : MonoBehaviour
     // Bool to describe if the player can take damage
     private bool _isInvincible;
 
+    // Reference to the FriendsDissolve script
+    private FriendsDissolve _friendsDissolve;
+
+    private FriendManager _friendManager;
+
     
     // Start is called before the first frame update
     void Start()
     {
+        // Gets the friend manager
+        _friendManager = GameObject.Find("GameManager").GetComponent<FriendManager>();
+        
         // Gets the renderer of the child object
         _renderer = GetComponentInChildren<Renderer>();
 
         // https://docs.unity3d.com/ScriptReference/Renderer-material.html
         // Gets the material of that renderer
         _playerMaterial = _renderer.GetComponent<Renderer>().material;
-        print(_playerMaterial);
         
         // Sets the lifepoints to the 1f, which means the emission color is white, indicating full health
         _lifePoints = 1f;
 
+        // Set losing light particles active and receiving light particles inactive
         losingLightParticles.gameObject.SetActive(false);
         recievingLightParticles.gameObject.SetActive(false);
 
@@ -76,28 +87,14 @@ public class DamageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(isFullHealth);
+        print(numberOfFriends);
         
-        // Checks if the player is near a lightsource, if false life points are subtracted
-        if (!isInLight)
-        {
-            _lifeChange = decreaseLifePoints;
-            losingLightParticles.gameObject.SetActive(true);
-            recievingLightParticles.gameObject.SetActive(false);
-            
-        }
+        // Checks if the player is near a lightsource, if false life points are subtracted, if true, life points are added
+        _lifeChange = isInLight ? increaseLifePoints : decreaseLifePoints;
 
-        // if true, life points are added
-        else
-        {
-            _lifeChange = increaseLifePoints;
-            recievingLightParticles.gameObject.SetActive(true);
-            losingLightParticles.gameObject.SetActive(false);
-        }
-
-        //_lifeChange = isInLight ? increaseLifePoints : decreaseLifePoints;
-        //recievingLightParticles.gameObject.SetActive(isInLight);
-        //losingLightParticles.gameObject.SetActive(!isInLight);
+        // Set the particle systems according to the value of isInLight
+        recievingLightParticles.gameObject.SetActive(isInLight);
+        losingLightParticles.gameObject.SetActive(!isInLight);
 
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
         // Lerps between two colors to signal the player's health
@@ -121,6 +118,12 @@ public class DamageController : MonoBehaviour
             isFullHealth = true;
         }        
 
+        else if (_lifePoints <= 0f && numberOfFriends > 0)
+        {
+            isFullHealth = false;
+            _friendsDissolve = _friendManager.Friends[_friendManager.friendIndex].GetComponent<FriendsDissolve>();
+            _friendsDissolve.DissolveAndHeal();
+        }
         // Else set it to false
         else
         {

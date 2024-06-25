@@ -25,6 +25,14 @@ public class MoveFriends : MonoBehaviour
     // speed of the friend
     private float speed = 5f;
 
+    // Reference to the DamageController script
+    private DamageController _damageController;
+
+    void Start()
+    {
+        _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -35,7 +43,7 @@ public class MoveFriends : MonoBehaviour
         if (isClose && Input.GetKeyDown(KeyCode.E))
         {
             hasInteracted = true;
-
+            _damageController.numberOfFriends++;
         }
 
         // if has Interacted is true the friend follow the player with an offset
