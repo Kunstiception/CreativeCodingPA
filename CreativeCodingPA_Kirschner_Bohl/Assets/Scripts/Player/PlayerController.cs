@@ -26,8 +26,13 @@ public class PlayerController : MonoBehaviour
     // References the Speedboost Script
     private SpeedBoost _speedBoost;
 
+    //References the AntiSpeedBoost Script;
+    private AntiSpeedBoost _antiSpeedBoost;
+
     // References the Object with the Speedboost Script attached to it
     private GameObject _boost;
+
+    private GameObject _antiBoost;
 
     // How long has the player been boosted for
     private float boostTime;
@@ -37,6 +42,9 @@ public class PlayerController : MonoBehaviour
     {
         //Gets the Speedboost Script 
         _speedBoost = GameObject.Find("Boost 1").GetComponent<SpeedBoost>();
+
+        //Gets the AntiSpeedBoost Script
+        _antiSpeedBoost = GameObject.Find("AntiSpeed").GetComponent<AntiSpeedBoost>();
 
     }
 
@@ -86,7 +94,20 @@ public class PlayerController : MonoBehaviour
                 boostTime = 0;
                 _speedBoost.isBoosted = false;
             }
-        } 
-          
+        }
+
+        // How long is the player being deboosted for
+        if (_antiSpeedBoost.isDeboosted == true)
+        {
+            boostTime += Time.deltaTime;
+
+            if (boostTime >= 3)
+            {
+                speed = 6;
+                boostTime = 0;
+                _antiSpeedBoost.isDeboosted = false;
+            }
+        }
+
     }
 }
