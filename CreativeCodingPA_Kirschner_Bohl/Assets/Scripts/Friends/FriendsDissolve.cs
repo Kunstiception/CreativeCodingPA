@@ -16,9 +16,13 @@ public class FriendsDissolve : MonoBehaviour
     // Reference to the damage controller
     private DamageController _damageController;
 
+    private FriendsDisplay _friendsDisplay;
+
     void Start()
     {
         _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+
+        _friendsDisplay = GameObject.Find("Friends_Grid").GetComponent<FriendsDisplay>();
 
         deathParticles.gameObject.SetActive(false);
     }
@@ -31,6 +35,7 @@ public class FriendsDissolve : MonoBehaviour
         _damageController._lifePoints = healingValue;
         deathParticles.gameObject.SetActive(false);
         _damageController.numberOfFriends += -1;
+        _friendsDisplay.UpdateFriendsDisplay();
         gameObject.gameObject.SetActive(false);
 
     }

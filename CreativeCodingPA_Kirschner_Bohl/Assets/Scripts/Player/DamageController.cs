@@ -59,7 +59,12 @@ public class DamageController : MonoBehaviour
     // Reference to the FriendsDissolve script
     private FriendsDissolve _friendsDissolve;
 
+    // Reference to the FriendManager script
     private FriendManager _friendManager;
+
+    // List of the currently found friends
+    // https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.add?view=net-6.0#system-collections-generic-list-1-add(-0)
+    public List<GameObject> _friends = new List<GameObject>();
 
     
     // Start is called before the first frame update
@@ -87,8 +92,7 @@ public class DamageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(numberOfFriends);
-        
+        print(_friends[0]);
         // Checks if the player is near a lightsource, if false life points are subtracted, if true, life points are added
         _lifeChange = isInLight ? increaseLifePoints : decreaseLifePoints;
 
@@ -111,26 +115,34 @@ public class DamageController : MonoBehaviour
         // The current color is set to be the emission color
         _playerMaterial.SetColor("_EmissionColor", currentColor);
 
-        // Else if the healthy color is reached, set isFullHealth to true
+        // If the healthy color is reached, set isFullHealth to true, character stays at full health for a few moments
         if (_lifePoints >= 1f)
         {
             StartCoroutine(FullCharge());
             isFullHealth = true;
         }        
-
+        // Else if the life points reach 0 and the number of friends is higher than 0, start the coroutine to save the player from dying
         else if (_lifePoints <= 0f && numberOfFriends > 0)
         {
             isFullHealth = false;
-            _friendsDissolve = _friendManager.Friends[_friendManager.friendIndex].GetComponent<FriendsDissolve>();
-            _friendsDissolve.DissolveAndHeal();
+
+            
+            if (_friends[0] != null)
+            {
+                _friendsDissolve = _friends[0].GetComponent<FriendsDissolve>();
+                _friendsDissolve.DissolveAndHeal();
+            }
+
+
         }
-        // Else set it to false
+        // Else: Only set isFullHealth to false
         else
         {
             isFullHealth = false;
         }
     }
 
+    // Coroutine that makes the character not lose health for a certain amount of time after being fully healed
     IEnumerator FullCharge()
     {
         _isInvincible = true;

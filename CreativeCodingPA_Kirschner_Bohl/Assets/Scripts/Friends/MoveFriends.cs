@@ -28,9 +28,16 @@ public class MoveFriends : MonoBehaviour
     // Reference to the DamageController script
     private DamageController _damageController;
 
+    private FriendManager _friendManager;
+
+    // Reference to the MoveFriends script
+    public GameObject correspondingFriend;
+
     void Start()
     {
         _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+
+        _friendManager = GameObject.Find("GameManager").GetComponent<FriendManager>();
     }
 
     // Update is called once per frame
@@ -44,6 +51,7 @@ public class MoveFriends : MonoBehaviour
         {
             hasInteracted = true;
             _damageController.numberOfFriends++;
+            _friendManager.AssignOffset(gameObject);
         }
 
         // if has Interacted is true the friend follow the player with an offset

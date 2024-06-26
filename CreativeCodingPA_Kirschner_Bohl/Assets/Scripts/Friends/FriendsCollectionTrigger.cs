@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class FriendsCollectionTrigger : MonoBehaviour
 {
-    
-    // Reference to the MoveFriends script
-    public GameObject correspondingFriend;
-
     // references text object
     public TextMeshProUGUI text;
     
@@ -21,7 +17,7 @@ public class FriendsCollectionTrigger : MonoBehaviour
 
     void Start()
     {
-        _moveFriends = correspondingFriend.GetComponent<MoveFriends>();
+        _moveFriends = GetComponentInParent<MoveFriends>();
     }
 
 
@@ -30,7 +26,6 @@ public class FriendsCollectionTrigger : MonoBehaviour
         // when player enters collider text appears and bool is set to true
         _moveFriends.isClose = true;
         text.gameObject.SetActive(true);
-        friendManager.AssignOffset(correspondingFriend);
     }
 
     private void OnTriggerExit(Collider other)

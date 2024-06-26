@@ -22,16 +22,20 @@ public class FriendManager : MonoBehaviour
     // Reference to the friends dispay script
     private FriendsDisplay _friendsDisplay;
 
+    private DamageController _damageController;
+
     // Start is called before the first frame update
     void Start()
     {
         _friendsDisplay = GameObject.Find("Friends_Grid").GetComponent<FriendsDisplay>();
+
+        _damageController = GameObject.Find("Player").GetComponent<DamageController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void AssignOffset(GameObject friend)
@@ -45,11 +49,13 @@ public class FriendManager : MonoBehaviour
             // Get the index of the given object in the array
             int index = Array.IndexOf(Friends, friend);
 
+            _damageController._friends.Add(friend);
+
             friendIndex = index;
 
-            _friendsDisplay.ShowFriend(index);
+            _friendsDisplay.UpdateFriendsDisplay();
             
-            if(index < 0 )
+            if(index <= 0 )
             {
                 zOffset = 0.5f;
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class FriendsDisplay : MonoBehaviour
@@ -11,18 +12,22 @@ public class FriendsDisplay : MonoBehaviour
 
     public Color activeColor;
 
+    private DamageController _damageController;
+
 
     
     // Start is called before the first frame update
     void Start()
     {
+        _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+
         ResetFriends();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ResetFriends()
@@ -33,8 +38,12 @@ public class FriendsDisplay : MonoBehaviour
         }
     }
 
-    public void ShowFriend(int index)
+    public void UpdateFriendsDisplay()
     {
-        friends[index].GetComponent<Image>().color = activeColor;
+        ResetFriends();
+        for (int i = 0; i < _damageController.numberOfFriends; i++)
+        {
+            friends[i].GetComponent<Image>().color = activeColor;
+        }
     }
 }
