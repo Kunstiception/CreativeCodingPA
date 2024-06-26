@@ -16,6 +16,7 @@ public class FriendsDissolve : MonoBehaviour
     // Reference to the damage controller
     private DamageController _damageController;
 
+    // Reference to the friends display script
     private FriendsDisplay _friendsDisplay;
 
     void Start()
@@ -34,7 +35,7 @@ public class FriendsDissolve : MonoBehaviour
         StartCoroutine(DeathEvent());
         _damageController._lifePoints = healingValue;
         deathParticles.gameObject.SetActive(false);
-        _damageController.numberOfFriends += -1;
+        _damageController.numberOfFriends--;
         _friendsDisplay.UpdateFriendsDisplay();
         gameObject.gameObject.SetActive(false);
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class FriendManager : MonoBehaviour
@@ -38,6 +37,8 @@ public class FriendManager : MonoBehaviour
         
     }
 
+
+    // Assign the offset of the friends according to the number of collected friends, add the friend to the list of collected friends, update the friends display
     public void AssignOffset(GameObject friend)
     {
         if(friend != null)
@@ -47,19 +48,19 @@ public class FriendManager : MonoBehaviour
             
             // https://learn.microsoft.com/en-us/dotnet/api/system.array.indexof?view=net-8.0#system-array-indexof(system-array-system-object)
             // Get the index of the given object in the array
-            int index = Array.IndexOf(Friends, friend);
+            // int index = Array.IndexOf(Friends, friend);
 
             _damageController._friends.Add(friend);
 
-            friendIndex = index;
+            //friendIndex = index;
 
             _friendsDisplay.UpdateFriendsDisplay();
             
-            if(index <= 0 )
+            if(_damageController.numberOfFriends <= 0)
             {
                 zOffset = 0.5f;
             }
-            else if(index == 1)
+            else if(_damageController.numberOfFriends == 1)
             {
                 zOffset = 1.0f;
             }
@@ -67,11 +68,27 @@ public class FriendManager : MonoBehaviour
             {
                 zOffset = 1.5f;
             }
-
-            
-            
+  
             _moveFriends.offset = _moveFriends.offset + new Vector3(0, 0, zOffset);
         }
         
+    }
+
+    public void ReassignOffset(GameObject friend)
+    {
+        if (_damageController.numberOfFriends == 1)
+        {
+            zOffset = 1f;
+        }
+        else if(_damageController.numberOfFriends == 2)
+        {
+            zOffset = 1.5f;
+        }
+        else
+        {
+            zOffset = 0.5f;
+        }
+
+        _friendsDisplay.UpdateFriendsDisplay();
     }
 }

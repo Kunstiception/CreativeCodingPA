@@ -32,6 +32,7 @@ public class FriendsDisplay : MonoBehaviour
 
     public void ResetFriends()
     {
+        
         foreach (var friend in friends)
         {
             friend.GetComponent<Image>().color = inactiveColor;

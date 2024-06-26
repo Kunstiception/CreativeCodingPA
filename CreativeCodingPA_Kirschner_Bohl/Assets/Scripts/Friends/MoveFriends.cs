@@ -9,9 +9,9 @@ public class MoveFriends : MonoBehaviour
     public bool isClose;
     // reference to the player
     public GameObject player;
-
+    // The normal speed
     public float normalSpeed = 5f;
-
+    // The speed when the friends needs to catch up to the player
     public float catchUpSpeed = 8f;
     // checks if interaction has happened
     public bool hasInteracted = false;

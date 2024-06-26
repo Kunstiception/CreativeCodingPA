@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class DamageController : MonoBehaviour
 {
+    // List of the currently found friends
+    // https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.add?view=net-6.0#system-collections-generic-list-1-add(-0)
+    public List<GameObject> _friends = new List<GameObject>();
+    
     // The rate at which life points are increased
     public float increaseLifePoints;
 
@@ -62,9 +66,7 @@ public class DamageController : MonoBehaviour
     // Reference to the FriendManager script
     private FriendManager _friendManager;
 
-    // List of the currently found friends
-    // https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.add?view=net-6.0#system-collections-generic-list-1-add(-0)
-    public List<GameObject> _friends = new List<GameObject>();
+    
 
     
     // Start is called before the first frame update
@@ -87,12 +89,14 @@ public class DamageController : MonoBehaviour
         losingLightParticles.gameObject.SetActive(false);
         recievingLightParticles.gameObject.SetActive(false);
 
+        isInLight = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(_friends[0]);
+        print(numberOfFriends);
         // Checks if the player is near a lightsource, if false life points are subtracted, if true, life points are added
         _lifeChange = isInLight ? increaseLifePoints : decreaseLifePoints;
 
@@ -125,12 +129,20 @@ public class DamageController : MonoBehaviour
         else if (_lifePoints <= 0f && numberOfFriends > 0)
         {
             isFullHealth = false;
-
-            
+            // If there is a friend, the player can be saved
             if (_friends[0] != null)
             {
+                // Get Friends Dissolve from the first list entry, trigger the coroutine and then remove the first list entry so the next entry can be number 0, then decrease numberOfFriends by 1
                 _friendsDissolve = _friends[0].GetComponent<FriendsDissolve>();
                 _friendsDissolve.DissolveAndHeal();
+                // https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
+                _friends.RemoveAt(0);
+                numberOfFriends--;
+                foreach (var friend in _friends)
+                {
+                    _friendManager.ReassignOffset(friend);
+                }
+                
             }
 
 
