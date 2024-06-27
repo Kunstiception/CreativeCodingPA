@@ -24,7 +24,7 @@ public class FriendsColorChange : MonoBehaviour
 
         _damageController = GameObject.Find("Player").GetComponent<DamageController>();
     }
-    
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -34,5 +34,6 @@ public class FriendsColorChange : MonoBehaviour
             _material.SetColor("_EmissionColor", _damageController.currentColor); 
         }
     }
+    */
     
 }

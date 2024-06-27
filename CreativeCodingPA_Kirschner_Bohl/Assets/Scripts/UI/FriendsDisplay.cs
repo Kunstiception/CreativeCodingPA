@@ -42,9 +42,11 @@ public class FriendsDisplay : MonoBehaviour
     public void UpdateFriendsDisplay()
     {
         ResetFriends();
-        for (int i = 0; i < _damageController.numberOfFriends; i++)
+
+        for (int i = 0; i < _damageController.friends.Count; i++)
         {
             friends[i].GetComponent<Image>().color = activeColor;
         }
+
     }
 }

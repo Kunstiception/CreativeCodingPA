@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         //When character dies Game Over screen appears and the player can't move anymore
-        if (_damageController._lifePoints <= 0f && _damageController.numberOfFriends == 0)
+        if (_damageController._lifePoints <= 0f && _damageController.friends.Count == 0)
         {
             gameOverUI.SetActive(true);
             _playerController.speed = 0;

@@ -45,22 +45,16 @@ public class FriendManager : MonoBehaviour
         {
             // Get the script on the friend object
             _moveFriends = friend.GetComponent<MoveFriends>();
-            
-            // https://learn.microsoft.com/en-us/dotnet/api/system.array.indexof?view=net-8.0#system-array-indexof(system-array-system-object)
-            // Get the index of the given object in the array
-            // int index = Array.IndexOf(Friends, friend);
-
-            _damageController._friends.Add(friend);
-
-            //friendIndex = index;
 
             _friendsDisplay.UpdateFriendsDisplay();
+
+            print(_damageController.friends.Count);
             
-            if(_damageController.numberOfFriends <= 0)
+            if(_damageController.friends.Count <= 0)
             {
                 zOffset = 0.5f;
             }
-            else if(_damageController.numberOfFriends == 1)
+            else if(_damageController.friends.Count == 1)
             {
                 zOffset = 1.0f;
             }
@@ -68,6 +62,8 @@ public class FriendManager : MonoBehaviour
             {
                 zOffset = 1.5f;
             }
+
+            print (zOffset);
   
             _moveFriends.offset = _moveFriends.offset + new Vector3(0, 0, zOffset);
         }
@@ -76,11 +72,11 @@ public class FriendManager : MonoBehaviour
 
     public void ReassignOffset(GameObject friend)
     {
-        if (_damageController.numberOfFriends == 1)
+        if (_damageController.friends.Count == 1)
         {
             zOffset = 1f;
         }
-        else if(_damageController.numberOfFriends == 2)
+        else if(_damageController.friends.Count == 2)
         {
             zOffset = 1.5f;
         }

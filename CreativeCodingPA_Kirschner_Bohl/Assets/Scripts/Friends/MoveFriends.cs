@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveFriends : MonoBehaviour
@@ -13,8 +14,7 @@ public class MoveFriends : MonoBehaviour
     public float normalSpeed = 5f;
     // The speed when the friends needs to catch up to the player
     public float catchUpSpeed = 8f;
-    // checks if interaction has happened
-    public bool hasInteracted = false;
+    
     // references text object
     public TextMeshProUGUI text;
     // offset of friend
@@ -28,10 +28,12 @@ public class MoveFriends : MonoBehaviour
     // Reference to the DamageController script
     private DamageController _damageController;
 
+    // Reference to the Friends Manager script
     private FriendManager _friendManager;
+    
+    // checks if interaction has happened
+    private bool hasInteracted = false;
 
-    // Reference to the MoveFriends script
-    public GameObject correspondingFriend;
 
     void Start()
     {
@@ -46,12 +48,19 @@ public class MoveFriends : MonoBehaviour
         // https://docs.unity3d.com/ScriptReference/Vector3.Distance.html
         _distance = Vector3.Distance(transform.position, player.transform.position);
 
-        //when isClose is true and E is pressed hasInteracted switches to true
+        // Assigns the correct offset to the friend so they dotn clip into each other and form a straight line
         if (isClose && Input.GetKeyDown(KeyCode.E))
         {
+            
+            
             hasInteracted = true;
-            _damageController.numberOfFriends++;
-            _friendManager.AssignOffset(gameObject);
+            if (!_damageController.friends.Contains(gameObject) && _damageController.friends.Count < 3)
+            {
+                _friendManager.AssignOffset(gameObject);
+                _damageController.friends.Add(gameObject);
+            }
+            
+            isClose = false;
         }
 
         // if has Interacted is true the friend follow the player with an offset

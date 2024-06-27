@@ -53953,7 +53953,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199647193}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.31269962, y: 0.000000023113225, z: -0.000000007609076, w: 0.9498521}
+  m_LocalRotation: {x: 0.31269962, y: -0.00000002311322, z: 0.000000007609074, w: 0.9498521}
   m_LocalPosition: {x: 20.352932, y: 12.180357, z: -18.018974}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -54731,7 +54731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258276073}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29113966, y: 2.7323447e-15, z: -1.164043e-15, w: 0.9566806}
+  m_LocalRotation: {x: 0.29113963, y: -3.9e-43, z: 1.8e-44, w: 0.9566806}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -63191,7 +63191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521235446}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32569888, y: 3.3024292e-23, z: -2.0574736e-23, w: 0.94547355}
+  m_LocalRotation: {x: 0.32569888, y: -5.8758467e-25, z: 5.230049e-24, w: 0.94547355}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -69622,7 +69622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664590945}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3084473, y: 0.00000002304847, z: -0.000000007473643, w: 0.95124143}
+  m_LocalRotation: {x: 0.3084473, y: -0.000000023281002, z: 0.000000007549043, w: 0.95124143}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -77979,7 +77979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecda7aa2c0f5da47b401fc9c9b59c4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _friends: []
+  friends: []
   increaseLifePoints: 0.4
   decreaseLifePoints: -0.12
   isInLight: 0
@@ -77991,7 +77991,6 @@ MonoBehaviour:
   _lifePoints: 1
   currentColor: {r: 0, g: 0, b: 0, a: 0}
   InvincibilityTime: 2
-  numberOfFriends: 0
 --- !u!54 &1886946024
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88651,7 +88650,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095744275}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3084473, y: 0.000000046244857, z: -0.000000014995248, w: 0.95124143}
+  m_LocalRotation: {x: 0.3084473, y: -0.000000046361187, z: 0.00000001503297, w: 0.95124143}
   m_LocalPosition: {x: 1.2286891, y: 6.0419564, z: -26.691378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
