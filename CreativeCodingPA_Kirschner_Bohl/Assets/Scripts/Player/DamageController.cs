@@ -136,7 +136,10 @@ public class DamageController : MonoBehaviour
                 _friendsDissolve.DissolveAndHeal();
                 // https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
                 friends.RemoveAt(0);
-          
+                foreach (var friend in friends)
+                {
+                    _friendManager.ReassignOffset(friend);
+                }
                 
                 
                 

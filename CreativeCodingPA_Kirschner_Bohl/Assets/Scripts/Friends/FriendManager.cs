@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class FriendManager : MonoBehaviour
 {
-
+    // The three possible offsets
+    public float[] offsets;
+    
     // An array storing all the collectible friends
     public GameObject[] Friends;
 
@@ -21,7 +23,9 @@ public class FriendManager : MonoBehaviour
     // Reference to the friends dispay script
     private FriendsDisplay _friendsDisplay;
 
+    // Reference to the Damage Controller script
     private DamageController _damageController;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +33,7 @@ public class FriendManager : MonoBehaviour
         _friendsDisplay = GameObject.Find("Friends_Grid").GetComponent<FriendsDisplay>();
 
         _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+
     }
 
     // Update is called once per frame
@@ -38,53 +43,46 @@ public class FriendManager : MonoBehaviour
     }
 
 
-    // Assign the offset of the friends according to the number of collected friends, add the friend to the list of collected friends, update the friends display
+    // Assign the offset of the friends according to the number of collected friends
+    // Add the friend to the list of collected friends, update the friends display
     public void AssignOffset(GameObject friend)
     {
         if(friend != null)
         {
-            // Get the script on the friend object
+            
             _moveFriends = friend.GetComponent<MoveFriends>();
 
             _friendsDisplay.UpdateFriendsDisplay();
-
-            print(_damageController.friends.Count);
             
             if(_damageController.friends.Count <= 0)
             {
-                zOffset = 0.5f;
+                zOffset = offsets[0];
             }
             else if(_damageController.friends.Count == 1)
             {
-                zOffset = 1.0f;
+                zOffset = offsets[1];
             }
             else
             {
-                zOffset = 1.5f;
+                zOffset = offsets[2];
             }
-
-            print (zOffset);
   
-            _moveFriends.offset = _moveFriends.offset + new Vector3(0, 0, zOffset);
+            _moveFriends.offset = new Vector3(0, 0, zOffset);
         }
         
     }
 
+    // After one friend has died, move the rest of the friends one offset-step closer to the player to fill the gap
+    // (only applies if there is more than one friend remaining)
     public void ReassignOffset(GameObject friend)
     {
-        if (_damageController.friends.Count == 1)
+        if (_damageController.friends.Count > 1)
         {
-            zOffset = 1f;
+            zOffset = zOffset - offsets[0];
         }
-        else if(_damageController.friends.Count == 2)
-        {
-            zOffset = 1.5f;
-        }
-        else
-        {
-            zOffset = 0.5f;
-        }
-
+        
         _friendsDisplay.UpdateFriendsDisplay();
+
+        _moveFriends.offset = new Vector3(0, 0, zOffset);
     }
 }
