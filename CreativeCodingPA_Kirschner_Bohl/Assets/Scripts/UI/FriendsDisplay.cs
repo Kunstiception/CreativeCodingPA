@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
@@ -43,10 +44,22 @@ public class FriendsDisplay : MonoBehaviour
     {
         ResetFriends();
 
-        for (int i = 0; i < _damageController.friends.Count; i++)
+        if (_damageController.friends.Count > 0 ) 
         {
-            friends[i].GetComponent<Image>().color = activeColor;
+            for (int i = 0; i < _damageController.friends.Count; i++)
+            {
+                friends[i].GetComponent<Image>().color = activeColor;
+            }
         }
 
+        else
+        {
+            print("djddjdj");
+            for (int i = 0; i < _damageController.friends.Count; i++)
+            {
+                friends[i].GetComponent<Image>().color = inactiveColor;
+            }
+        }
+        
     }
 }

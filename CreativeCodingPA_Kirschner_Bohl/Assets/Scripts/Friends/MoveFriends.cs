@@ -30,6 +30,8 @@ public class MoveFriends : MonoBehaviour
 
     // Reference to the Friends Manager script
     private FriendManager _friendManager;
+
+    private FriendsDisplay _friendsDisplay;
     
     // checks if interaction has happened
     private bool hasInteracted = false;
@@ -40,6 +42,8 @@ public class MoveFriends : MonoBehaviour
         _damageController = GameObject.Find("Player").GetComponent<DamageController>();
 
         _friendManager = GameObject.Find("GameManager").GetComponent<FriendManager>();
+
+        _friendsDisplay = GameObject.Find("Friends_Grid").GetComponent<FriendsDisplay>();
     }
 
     // Update is called once per frame
@@ -51,13 +55,12 @@ public class MoveFriends : MonoBehaviour
         // Assigns the correct offset to the friend so they dotn clip into each other and form a straight line
         if (isClose && Input.GetKeyDown(KeyCode.E))
         {
-            
-            
             hasInteracted = true;
             if (!_damageController.friends.Contains(gameObject) && _damageController.friends.Count < 3)
             {
                 _friendManager.AssignOffset(gameObject);
                 _damageController.friends.Add(gameObject);
+                _friendsDisplay.UpdateFriendsDisplay();
             }
             
             isClose = false;

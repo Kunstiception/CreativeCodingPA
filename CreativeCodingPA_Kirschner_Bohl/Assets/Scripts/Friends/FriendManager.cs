@@ -9,7 +9,7 @@ public class FriendManager : MonoBehaviour
     public float[] offsets;
     
     // An array storing all the collectible friends
-    public GameObject[] Friends;
+    //public GameObject[] Friends;
 
     // Index of the current friend
     public int friendIndex;
@@ -51,8 +51,6 @@ public class FriendManager : MonoBehaviour
         {
             
             _moveFriends = friend.GetComponent<MoveFriends>();
-
-            _friendsDisplay.UpdateFriendsDisplay();
             
             if(_damageController.friends.Count <= 0)
             {
@@ -80,9 +78,9 @@ public class FriendManager : MonoBehaviour
         {
             zOffset = zOffset - offsets[0];
         }
-        
-        _friendsDisplay.UpdateFriendsDisplay();
 
         _moveFriends.offset = new Vector3(0, 0, zOffset);
+
+        _friendsDisplay.UpdateFriendsDisplay();
     }
 }

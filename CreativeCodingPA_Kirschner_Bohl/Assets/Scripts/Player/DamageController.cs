@@ -129,13 +129,14 @@ public class DamageController : MonoBehaviour
         {
             isFullHealth = false;
             // If there is a friend, the player can be saved
-            if (friends[0] != null)
+            if (friends.Count > 0 && friends[0] != null)
             {
                 // Get Friends Dissolve from the first list entry, trigger the coroutine and then remove the first list entry so the next entry can be number 0, then decrease numberOfFriends by 1
                 _friendsDissolve = friends[0].GetComponent<FriendsDissolve>();
                 _friendsDissolve.DissolveAndHeal();
                 // https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
                 friends.RemoveAt(0);
+                print(friends.Count);
                 foreach (var friend in friends)
                 {
                     _friendManager.ReassignOffset(friend);
