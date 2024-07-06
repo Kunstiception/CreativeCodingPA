@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class MoveFriends : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class MoveFriends : MonoBehaviour
     // checks if interaction has happened
     private bool hasInteracted = false;
 
+    // The Vector3 to where the friends are being moved towards
+    private Vector3 _playerAnchor;
+
 
     void Start()
     {
@@ -51,6 +55,7 @@ public class MoveFriends : MonoBehaviour
     {
         // https://docs.unity3d.com/ScriptReference/Vector3.Distance.html
         _distance = Vector3.Distance(transform.position, player.transform.position);
+        
 
         // Assigns the correct offset to the friend so they dotn clip into each other and form a straight line
         if (isClose && Input.GetKeyDown(KeyCode.E))
@@ -61,6 +66,7 @@ public class MoveFriends : MonoBehaviour
                 _friendManager.AssignOffset(gameObject);
                 _damageController.friends.Add(gameObject);
                 _friendsDisplay.UpdateFriendsDisplay();
+
             }
             
             isClose = false;
@@ -69,9 +75,13 @@ public class MoveFriends : MonoBehaviour
         // if has Interacted is true the friend follow the player with an offset
         if (hasInteracted == true)
         {
-
-            transform.position = Vector3.MoveTowards(transform.position, (player.transform.position - offset), speed * Time.deltaTime);
             
+            transform.localRotation = player.transform.rotation;
+            //https://gamedev.stackexchange.com/questions/197281/how-can-i-make-an-object-follow-behind-the-player-with-respect-to-its-rotation-s
+            _playerAnchor = player.transform.position + player.transform.TransformDirection(-offset);
+            transform.position = Vector3.MoveTowards(transform.position, _playerAnchor, speed * Time.deltaTime);
+            
+
             text.gameObject.SetActive(false);
 
             if(_distance > 3)
@@ -84,5 +94,14 @@ public class MoveFriends : MonoBehaviour
             }
 
         }
+    }
+
+    IEnumerator WaitUntilReached()
+    {
+        print(_distance);
+        print(offset.z);
+        yield return new WaitUntil(() => (_distance == offset.z));
+        
+
     }
 }

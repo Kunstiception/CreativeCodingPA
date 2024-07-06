@@ -18,10 +18,13 @@ public class FriendManager : MonoBehaviour
     private MoveFriends _moveFriends;
 
     // The offset of the friends on the z-axis
-    private float zOffset;
+    private float offset;
 
     // Reference to the friends dispay script
     private FriendsDisplay _friendsDisplay;
+
+    // Reference to the player object
+    private GameObject _player;
 
     // Reference to the Damage Controller script
     private DamageController _damageController;
@@ -32,7 +35,9 @@ public class FriendManager : MonoBehaviour
     {
         _friendsDisplay = GameObject.Find("Friends_Grid").GetComponent<FriendsDisplay>();
 
-        _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+        _player = GameObject.Find("Player");
+
+        _damageController = _player.GetComponent<DamageController>();
 
     }
 
@@ -54,18 +59,18 @@ public class FriendManager : MonoBehaviour
             
             if(_damageController.friends.Count <= 0)
             {
-                zOffset = offsets[0];
+                offset = offsets[0];
             }
             else if(_damageController.friends.Count == 1)
             {
-                zOffset = offsets[1];
+                offset = offsets[1];
             }
             else
             {
-                zOffset = offsets[2];
+                offset = offsets[2];
             }
   
-            _moveFriends.offset = new Vector3(0, 0, zOffset);
+            _moveFriends.offset = new Vector3(0, 0, offset);
         }
         
     }
@@ -76,11 +81,33 @@ public class FriendManager : MonoBehaviour
     {
         if (_damageController.friends.Count > 1)
         {
-            zOffset = zOffset - offsets[0];
+            offset = offset - offsets[0];
         }
 
-        _moveFriends.offset = new Vector3(0, 0, zOffset);
+        _moveFriends.offset = new Vector3(0, 0, offset);
 
         _friendsDisplay.UpdateFriendsDisplay();
+    }
+
+    public void ChangedRotationOffset(GameObject friend)
+    {
+
+        //ReassignOffset(friend);
+        if (_player.transform.eulerAngles.y <= 89)
+        {
+            _moveFriends.offset = new Vector3(0, 0, offset );
+        }
+        else if(_player.transform.eulerAngles.y > 90)
+        {
+            _moveFriends.offset = new Vector3(offset, 0, 0);
+        }
+        else if (_player.transform.eulerAngles.y > 180)
+        {
+            _moveFriends.offset = new Vector3(0, 0, offset);
+        }
+        else if (_player.transform.eulerAngles.y > 290)
+        {
+            _moveFriends.offset = new Vector3(0, 0, -offset);
+        }
     }
 }
