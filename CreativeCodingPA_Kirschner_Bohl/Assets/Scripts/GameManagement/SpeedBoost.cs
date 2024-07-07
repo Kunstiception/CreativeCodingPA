@@ -24,12 +24,12 @@ public class SpeedBoost : MonoBehaviour
         // Default state of the player when not boosted
         _playerController.speed = 6;
         boostTime = 0;
-        isBoosted = false;
+        _playerController.isBoosted = false;
     }
        // Boost when player touches the speedboost object; also destroys it
     void OnTriggerEnter(Collider other)
     {
-        isBoosted = true;
+        _playerController.isBoosted = true;
         _playerController.speed = 12;
         Destroy(gameObject);
     }

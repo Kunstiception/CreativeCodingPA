@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Is the player boosted?
+    public bool isBoosted;
+
+    // Is the player deboosted?
+    public bool isDeboosted;
+    
     // A bool to describe if the player is curently jumping or not
     public bool isJumping;
 
@@ -38,13 +44,15 @@ public class PlayerController : MonoBehaviour
     private float boostTime;
 
 
+
+
     private void Start()
     {
         //Gets the Speedboost Script 
-        _speedBoost = GameObject.Find("Boost 1").GetComponent<SpeedBoost>();
+        //_speedBoost = GameObject.Find("Boost 1").GetComponent<SpeedBoost>();
 
         //Gets the AntiSpeedBoost Script
-        _antiSpeedBoost = GameObject.Find("AntiSpeed").GetComponent<AntiSpeedBoost>();
+        //_antiSpeedBoost = GameObject.Find("AntiSpeed").GetComponent<AntiSpeedBoost>();
 
     }
 
@@ -84,7 +92,7 @@ public class PlayerController : MonoBehaviour
             }
 
         // How long is the player being boosted for
-        if (_speedBoost.isBoosted == true)
+        if (isBoosted == true)
         {
             boostTime += Time.deltaTime;
 
@@ -92,12 +100,12 @@ public class PlayerController : MonoBehaviour
             {
                 speed = 6;
                 boostTime = 0;
-                _speedBoost.isBoosted = false;
+                isBoosted = false;
             }
         }
 
         // How long is the player being deboosted for
-        if (_antiSpeedBoost.isDeboosted == true)
+        if (isDeboosted == true)
         {
             boostTime += Time.deltaTime;
 
@@ -105,7 +113,7 @@ public class PlayerController : MonoBehaviour
             {
                 speed = 6;
                 boostTime = 0;
-                _antiSpeedBoost.isDeboosted = false;
+                isDeboosted = false;
             }
         }
 

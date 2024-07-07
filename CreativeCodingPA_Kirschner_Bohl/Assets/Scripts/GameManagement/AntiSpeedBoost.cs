@@ -23,12 +23,12 @@ public class AntiSpeedBoost : MonoBehaviour
         // Default state of the player when not deboosted
         _playerController.speed = 6;
         deboostTime = 0;
-        isDeboosted = false;
+        _playerController.isDeboosted = false;
     }
     // Boost when player touches the Antispeedboost object; also destroys it
     void OnTriggerEnter(Collider other)
     {
-        isDeboosted = true;
+        _playerController.isDeboosted = true;
         _playerController.speed = 3;
         Destroy(gameObject);
 
