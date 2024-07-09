@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void OnApplicationFocus(bool focus)
     {
         //
