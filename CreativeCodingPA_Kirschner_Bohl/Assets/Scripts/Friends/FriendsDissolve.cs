@@ -33,7 +33,7 @@ public class FriendsDissolve : MonoBehaviour
     {
         deathParticles.gameObject.SetActive(true);
         StartCoroutine(DeathEvent());
-        _damageController._lifePoints = healingValue;
+        _damageController.lifePoints = healingValue;
         deathParticles.gameObject.SetActive(false);
         gameObject.gameObject.SetActive(false);
 

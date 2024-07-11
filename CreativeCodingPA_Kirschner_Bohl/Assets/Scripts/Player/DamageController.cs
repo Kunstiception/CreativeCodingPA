@@ -34,7 +34,7 @@ public class DamageController : MonoBehaviour
     public ParticleSystem recievingLightParticles;
 
     // The life points of the player character represented by its color
-    public float _lifePoints;
+    public float lifePoints;
 
     // The current color to be applied to the material
     public Color currentColor;
@@ -83,7 +83,7 @@ public class DamageController : MonoBehaviour
         _playerMaterial = _renderer.GetComponent<Renderer>().material;
         
         // Sets the lifepoints to the 1f, which means the emission color is white, indicating full health
-        _lifePoints = 1f;
+        lifePoints = 1f;
 
         // Set losing light particles active and receiving light particles inactive
         losingLightParticles.gameObject.SetActive(false);
@@ -105,13 +105,13 @@ public class DamageController : MonoBehaviour
 
         //https://docs.unity3d.com/ScriptReference/Color.Lerp.html
         // Lerps between two colors to signal the player's health
-        currentColor = Color.Lerp(deathColor, healthyColor,  _lifePoints);
+        currentColor = Color.Lerp(deathColor, healthyColor,  lifePoints);
         // https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
         
         // Increases the the interpolation by a fixed value multiplied by time.deltaTime
         if (_isInvincible == false)
         {
-            _lifePoints += (_lifeChange * Time.deltaTime);
+            lifePoints += (_lifeChange * Time.deltaTime);
         }
         
         // https://docs.unity3d.com/ScriptReference/Material.SetColor.html#:~:text=Use%20SetColor%20to%20change%20the,were%20not%20previously%20in%20use.
@@ -119,13 +119,13 @@ public class DamageController : MonoBehaviour
         _playerMaterial.SetColor("_EmissionColor", currentColor);
 
         // If the healthy color is reached, set isFullHealth to true, character stays at full health for a few moments
-        if (_lifePoints >= 1f)
+        if (lifePoints >= 1f)
         {
             StartCoroutine(FullCharge());
             isFullHealth = true;
         }        
         // Else if the life points reach 0 and the number of friends is higher than 0, start the coroutine to save the player from dying
-        else if (_lifePoints <= 0f && friends.Count > 0)
+        else if (lifePoints <= 0f && friends.Count > 0)
         {
             isFullHealth = false;
             // If there is a friend, the player can be saved

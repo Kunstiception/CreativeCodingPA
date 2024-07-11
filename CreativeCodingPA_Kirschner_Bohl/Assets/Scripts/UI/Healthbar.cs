@@ -31,6 +31,6 @@ public class Healthbar : MonoBehaviour
     void Update()
     {
         // Set the slider using the life points
-        _slider.value = _damageController._lifePoints;
+        _slider.value = _damageController.lifePoints;
     }
 }
