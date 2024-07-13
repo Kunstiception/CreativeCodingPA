@@ -28,7 +28,10 @@ public class FriendsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(_damageController.friends.Count == 0)
+        {
+            ResetFriends();
+        }
     }
 
     public void ResetFriends()
