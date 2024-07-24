@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoosted: 0
+  speedBoost: {fileID: 8300000, guid: d615558a36a601b44acc692fe15f374f, type: 3}
 --- !u!135 &8309260643757111424
 SphereCollider:
   m_ObjectHideFlags: 0

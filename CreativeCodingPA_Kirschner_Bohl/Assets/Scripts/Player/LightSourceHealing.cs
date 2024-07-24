@@ -6,7 +6,10 @@ public class LightSourceHealing : MonoBehaviour
 {
     // Reference to the Lightsource belonging to this collider
     public Light _correspondingLightsource;
-    
+
+    //the sound that plays when player is being healed
+    public AudioClip lightSourceHeal;
+
     // Reference to the player object
     private GameObject _player;
 
@@ -25,6 +28,7 @@ public class LightSourceHealing : MonoBehaviour
         if (other.gameObject == _player)
         {
             _damageController.isInLight = true;
+            _player.GetComponent<AudioSource>().PlayOneShot(lightSourceHeal);
         }
 
         if(other.gameObject == _player && _damageController.isFullHealth == true)

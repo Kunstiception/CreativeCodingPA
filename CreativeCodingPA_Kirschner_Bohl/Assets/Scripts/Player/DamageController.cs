@@ -42,8 +42,8 @@ public class DamageController : MonoBehaviour
     // Time after being fully reacharged where the player doesnt lose any health
     public int InvincibilityTime;
 
-    // The number of collected friends
-    //public int numberOfFriends;
+    // Bool to describe if the player can take damage
+    public bool isInvincible;
 
     // Reference to the renderer of the child game object
     private Renderer _renderer;
@@ -57,8 +57,6 @@ public class DamageController : MonoBehaviour
     // Extra variable to set the lifechange to 0
     private float _fullChargeLifechange = 0;
 
-    // Bool to describe if the player can take damage
-    private bool _isInvincible;
 
     // Reference to the FriendsDissolve script
     private FriendsDissolve _friendsDissolve;
@@ -109,7 +107,7 @@ public class DamageController : MonoBehaviour
         // https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html
         
         // Increases the the interpolation by a fixed value multiplied by time.deltaTime
-        if (_isInvincible == false)
+        if (isInvincible == false)
         {
             lifePoints += (_lifeChange * Time.deltaTime);
         }
@@ -158,11 +156,11 @@ public class DamageController : MonoBehaviour
     // Coroutine that makes the character not lose health for a certain amount of time after being fully healed
     IEnumerator FullCharge()
     {
-        _isInvincible = true;
+        isInvincible = true;
         _lifeChange = _fullChargeLifechange;
         // https://docs.unity3d.com/ScriptReference/WaitForSeconds.html
         yield return new WaitForSeconds(InvincibilityTime);
         _lifeChange = decreaseLifePoints;
-        _isInvincible = false;
+        isInvincible = false;
     }
 }

@@ -9,18 +9,26 @@ public class MoveFriends : MonoBehaviour
 {
     // checks is player is close enough to interact
     public bool isClose;
+
     // reference to the player
     public GameObject player;
+
     // The normal speed
     public float normalSpeed = 5f;
+
     // The speed when the friends needs to catch up to the player
     public float catchUpSpeed = 8f;
     
     // references text object
     public TextMeshProUGUI text;
+
     // offset of friend
     public Vector3 offset;
 
+    //the sound that plays when friend has been collected
+    public AudioClip friendCollected;
+
+    //Friend distance to player
     private float _distance;
     
     // speed of the friend
@@ -32,6 +40,7 @@ public class MoveFriends : MonoBehaviour
     // Reference to the Friends Manager script
     private FriendManager _friendManager;
 
+    //References the FriendsDisplay script
     private FriendsDisplay _friendsDisplay;
     
     // checks if interaction has happened
@@ -40,10 +49,15 @@ public class MoveFriends : MonoBehaviour
     // The Vector3 to where the friends are being moved towards
     private Vector3 _playerAnchor;
 
+    //References the player
+    private GameObject _player;
+
 
     void Start()
     {
-        _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+        _player = GameObject.Find("Player");
+
+        _damageController = _player.GetComponent<DamageController>();
 
         _friendManager = GameObject.Find("GameManager").GetComponent<FriendManager>();
 
@@ -66,6 +80,7 @@ public class MoveFriends : MonoBehaviour
                 _friendManager.AssignOffset(gameObject);
                 _damageController.friends.Add(gameObject);
                 _friendsDisplay.UpdateFriendsDisplay();
+                _player.GetComponent<AudioSource>().PlayOneShot(friendCollected);
 
             }
             

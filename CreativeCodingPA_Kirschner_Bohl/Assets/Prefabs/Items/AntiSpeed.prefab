@@ -4897,6 +4897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deboostTime: 0
   isDeboosted: 0
+  antiSpeedBoost: {fileID: 8300000, guid: b104cfda73bf5e14cbbf840058c8918e, type: 3}
 --- !u!23 &6556890333399648133
 MeshRenderer:
   m_ObjectHideFlags: 0

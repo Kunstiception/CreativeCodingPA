@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _correspondingLightsource: {fileID: 1854438872993851388}
+  lightSourceHeal: {fileID: 8300000, guid: b1952a9523744504885501b084ad7009, type: 3}
 --- !u!1 &9007654416578989385
 GameObject:
   m_ObjectHideFlags: 0

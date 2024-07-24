@@ -15,10 +15,14 @@ public class AntiSpeedBoost : MonoBehaviour
     // Checks if the player is deboosted or not
     public bool isDeboosted;
 
+    //the sound that plays when player gets a antispeedboost
+    public AudioClip antiSpeedBoost;
+
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        _player = GameObject.Find("Player");
+        _playerController = _player.GetComponent<PlayerController>();
 
         // Default state of the player when not deboosted
         _playerController.speed = 6;
@@ -30,6 +34,7 @@ public class AntiSpeedBoost : MonoBehaviour
     {
         _playerController.isDeboosted = true;
         _playerController.speed = 3;
+        _player.GetComponent<AudioSource>().PlayOneShot(antiSpeedBoost);
         Destroy(gameObject);
 
     }

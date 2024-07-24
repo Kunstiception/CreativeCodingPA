@@ -5,25 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    //References the player controller script
-    private PlayerController _playerController;
-
-    //References the damage controller script
-    private DamageController _damageController;
-
     //The Game Over Scrren
     public GameObject gameOverUI;
 
     //Has the character died?
     public bool isGameOver;
 
+    public AudioClip deathSound;
+
+    //References the player
+    private GameObject _player;
+
+    //References the player controller script
+    private PlayerController _playerController;
+
+    //References the damage controller script
+    private DamageController _damageController;
+
+    // Checks if the death sound has already played
+    private bool _hasPlayed;
+
+    //References the audio source of the camera
+    private AudioSource _camAudioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-
-        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        _damageController = GameObject.Find("Player").GetComponent<DamageController>();
+        _player = GameObject.Find("Player");
+        _playerController = _player.GetComponent<PlayerController>();
+        _damageController = _player.GetComponent<DamageController>();
+        _camAudioSource = Camera.main.GetComponent<AudioSource>();
         isGameOver = false;
     }
 
@@ -38,6 +49,13 @@ public class UIManager : MonoBehaviour
             _playerController.turnSpeed = 0;
             isGameOver = true;
             Cursor.lockState = CursorLockMode.None;
+            _camAudioSource.Stop();
+
+            if(_hasPlayed == false)
+            {
+                _player.GetComponent<AudioSource>().PlayOneShot(deathSound);
+                _hasPlayed = true;
+            }
 
         }
     }
@@ -49,7 +67,7 @@ public class UIManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
 
