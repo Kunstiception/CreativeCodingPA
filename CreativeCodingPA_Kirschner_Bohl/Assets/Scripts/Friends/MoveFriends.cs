@@ -52,10 +52,14 @@ public class MoveFriends : MonoBehaviour
     //References the player
     private GameObject _player;
 
+    private AudioSource _audioSource;
+
 
     void Start()
     {
         _player = GameObject.Find("Player");
+
+        _audioSource = _player.GetComponent<AudioSource>();
 
         _damageController = _player.GetComponent<DamageController>();
 
@@ -69,19 +73,19 @@ public class MoveFriends : MonoBehaviour
     {
         // https://docs.unity3d.com/ScriptReference/Vector3.Distance.html
         _distance = Vector3.Distance(transform.position, player.transform.position);
-        
 
         // Assigns the correct offset to the friend so they dotn clip into each other and form a straight line
         if (isClose && Input.GetKeyDown(KeyCode.E))
         {
             hasInteracted = true;
+            
+
             if (!_damageController.friends.Contains(gameObject) && _damageController.friends.Count < 3)
             {
                 _friendManager.AssignOffset(gameObject);
                 _damageController.friends.Add(gameObject);
                 _friendsDisplay.UpdateFriendsDisplay();
-                _player.GetComponent<AudioSource>().PlayOneShot(friendCollected);
-
+                _audioSource.PlayOneShot(friendCollected, 1f);
             }
             
             isClose = false;

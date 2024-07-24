@@ -15,6 +15,9 @@ public class LightSourceHealing : MonoBehaviour
 
     // Reference to the damage controller script
     private DamageController _damageController;
+
+    // Bool to control how often the healing sound will be played
+    private bool _hasPlayed;
     
     // Start is called before the first frame update
     void Start()
@@ -28,7 +31,12 @@ public class LightSourceHealing : MonoBehaviour
         if (other.gameObject == _player)
         {
             _damageController.isInLight = true;
-            _player.GetComponent<AudioSource>().PlayOneShot(lightSourceHeal);
+            if(!_hasPlayed)
+            {
+                _player.GetComponent<AudioSource>().PlayOneShot(lightSourceHeal);
+                _hasPlayed = true;
+            }
+            
         }
 
         if(other.gameObject == _player && _damageController.isFullHealth == true)
