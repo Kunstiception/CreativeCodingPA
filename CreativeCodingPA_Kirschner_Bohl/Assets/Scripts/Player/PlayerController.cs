@@ -44,15 +44,9 @@ public class PlayerController : MonoBehaviour
     private float boostTime;
 
 
-
-
     private void Start()
     {
-        //Gets the Speedboost Script 
-        //_speedBoost = GameObject.Find("Boost 1").GetComponent<SpeedBoost>();
 
-        //Gets the AntiSpeedBoost Script
-        //_antiSpeedBoost = GameObject.Find("AntiSpeed").GetComponent<AntiSpeedBoost>();
 
     }
 
@@ -77,7 +71,7 @@ public class PlayerController : MonoBehaviour
         {
 
         // As long as the player doesnt move vertically: Rotating the character is allowed
-        transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime * 2);
         }
 
         // If the player moves backward, then invert the turn angle
