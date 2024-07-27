@@ -34,7 +34,7 @@ public class AntiSpeedBoost : MonoBehaviour
     {
         _playerController.isDeboosted = true;
         _playerController.speed = 3;
-        _player.GetComponent<AudioSource>().PlayOneShot(antiSpeedBoost);
+        _player.GetComponent<AudioSource>().PlayOneShot(antiSpeedBoost, 0.7f);
         Destroy(gameObject);
 
     }

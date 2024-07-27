@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class MoveFriends : MonoBehaviour
 {
@@ -52,6 +51,7 @@ public class MoveFriends : MonoBehaviour
     //References the player
     private GameObject _player;
 
+    // Reference to the corresponding AudioSource
     private AudioSource _audioSource;
 
 
@@ -74,7 +74,7 @@ public class MoveFriends : MonoBehaviour
         // https://docs.unity3d.com/ScriptReference/Vector3.Distance.html
         _distance = Vector3.Distance(transform.position, player.transform.position);
 
-        // Assigns the correct offset to the friend so they dotn clip into each other and form a straight line
+        // Assigns the correct offset to the friend so they dont clip into each other and form a straight line
         if (isClose && Input.GetKeyDown(KeyCode.E))
         {
             hasInteracted = true;
@@ -91,7 +91,7 @@ public class MoveFriends : MonoBehaviour
             isClose = false;
         }
 
-        // if has Interacted is true the friend follow the player with an offset
+        // if has Interacted is true, the friends follow the player with an offset
         if (hasInteracted == true)
         {
             
@@ -103,6 +103,7 @@ public class MoveFriends : MonoBehaviour
 
             text.gameObject.SetActive(false);
 
+            // make the friends go faster so they dont fall behind after reaching a certain distance to the player
             if(_distance > 3)
             {
                 speed = catchUpSpeed;
@@ -113,14 +114,5 @@ public class MoveFriends : MonoBehaviour
             }
 
         }
-    }
-
-    IEnumerator WaitUntilReached()
-    {
-        print(_distance);
-        print(offset.z);
-        yield return new WaitUntil(() => (_distance == offset.z));
-        
-
     }
 }

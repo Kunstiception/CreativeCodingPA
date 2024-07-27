@@ -43,7 +43,7 @@ public class Healthbar : MonoBehaviour
         _slider.value = _damageController.lifePoints;
         
         
-        // Change the color of the healthbar when it goes under 0.33
+        // Change the color of the healthbar to the risky color when it goes under 0.33
         if ( _damageController.lifePoints < 0.33f )
         {
             _fill.color = riskyColor;

@@ -44,12 +44,6 @@ public class PlayerController : MonoBehaviour
     private float boostTime;
 
 
-    private void Start()
-    {
-
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -70,7 +64,7 @@ public class PlayerController : MonoBehaviour
         if (verticalInput == 0f)
         {
 
-        // As long as the player doesnt move vertically: Rotating the character is allowed
+        // As long as the player doesnt move vertically: Rotating the character is allowed and the rotation speed is doubled to allow for better control of the character
         transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime * 2);
         }
 

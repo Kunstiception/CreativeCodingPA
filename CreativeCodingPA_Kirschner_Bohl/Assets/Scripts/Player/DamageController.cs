@@ -57,7 +57,6 @@ public class DamageController : MonoBehaviour
     // Extra variable to set the lifechange to 0
     private float _fullChargeLifechange = 0;
 
-
     // Reference to the FriendsDissolve script
     private FriendsDissolve _friendsDissolve;
 
@@ -138,13 +137,8 @@ public class DamageController : MonoBehaviour
                 foreach (var friend in friends)
                 {
                     _friendManager.ReassignOffset(friend);
-                }
-                
-                
-                
+                } 
             }
-
-
         }
         // Else: Only set isFullHealth to false
         else

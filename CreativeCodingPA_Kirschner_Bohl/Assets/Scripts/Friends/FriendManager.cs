@@ -7,9 +7,6 @@ public class FriendManager : MonoBehaviour
 {
     // The three possible offsets
     public float[] offsets;
-    
-    // An array storing all the collectible friends
-    //public GameObject[] Friends;
 
     // Index of the current friend
     public int friendIndex;
@@ -39,12 +36,6 @@ public class FriendManager : MonoBehaviour
 
         _damageController = _player.GetComponent<DamageController>();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 
@@ -87,27 +78,5 @@ public class FriendManager : MonoBehaviour
         _moveFriends.offset = new Vector3(0, 0, offset);
 
         _friendsDisplay.UpdateFriendsDisplay();
-    }
-
-    public void ChangedRotationOffset(GameObject friend)
-    {
-
-        //ReassignOffset(friend);
-        if (_player.transform.eulerAngles.y <= 89)
-        {
-            _moveFriends.offset = new Vector3(0, 0, offset );
-        }
-        else if(_player.transform.eulerAngles.y > 90)
-        {
-            _moveFriends.offset = new Vector3(offset, 0, 0);
-        }
-        else if (_player.transform.eulerAngles.y > 180)
-        {
-            _moveFriends.offset = new Vector3(0, 0, offset);
-        }
-        else if (_player.transform.eulerAngles.y > 290)
-        {
-            _moveFriends.offset = new Vector3(0, 0, -offset);
-        }
     }
 }

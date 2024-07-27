@@ -49,6 +49,7 @@ public class FriendsDissolve : MonoBehaviour
 
     }
 
+    // Wait a moment until effect is applied (so a possible partile effect could play first)
     IEnumerator DeathEvent()
     {
         yield return new WaitForSeconds(deathTime);

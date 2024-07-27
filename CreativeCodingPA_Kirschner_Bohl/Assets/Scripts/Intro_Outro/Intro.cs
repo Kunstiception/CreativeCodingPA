@@ -7,13 +7,28 @@ using TMPro;
 
 public class Intro : MonoBehaviour
 {
+    // Array of audio files
     public AudioClip[] introAudios;
+
+    // Array of strings to be showns as subtitles
     public string[] subtitles;
+
+    // Reference to the animation clip
     public AnimationClip fadeAway;
+
+    // The subtitles
     private TMP_Text _text;
+
+    // The box behind the subtitles
     private Image _textBox;
+
+    // Reference to the animator
     private Animator _animator;
+
+    // Reference to the BlackScreen-Animator
     private Animator _animatorBlackScreen;
+
+    // Reference to the audio source
     private AudioSource _audioSource;
 
     // Start is called before the first frame update
@@ -29,6 +44,7 @@ public class Intro : MonoBehaviour
         StartCoroutine(WaitForAudio());
     }
 
+    // Coroutine for the intro monologue
     IEnumerator WaitForAudio()
     {
        _animatorBlackScreen.SetTrigger("FadeAway");
@@ -57,6 +73,7 @@ public class Intro : MonoBehaviour
 
     }
 
+    // Play audio and set the subtitles
     private IEnumerator PlayAudioAndSetText(int index)
     {
         _audioSource.PlayOneShot(introAudios[index], 1);

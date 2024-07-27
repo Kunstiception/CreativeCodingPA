@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class OutroTrigger : MonoBehaviour
 {
+    // Reference to the animation clip
     public AnimationClip fadeAway;
+
+    // Reference to the animator
     private Animator _animator;
+
+    // Reference to the damage controller script
     private DamageController _damageController;
 
     private void Start()
@@ -15,6 +20,7 @@ public class OutroTrigger : MonoBehaviour
         _damageController = GameObject.Find("Player").GetComponent<DamageController>();
     }
 
+    // Make the player invincible and start the coroutine to end the game
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -24,6 +30,7 @@ public class OutroTrigger : MonoBehaviour
         }
     }
 
+    // Wait until the animation has finished and load the final scene
     IEnumerator WaitForAnimation()
     {
         _animator.SetTrigger("FadeAway");

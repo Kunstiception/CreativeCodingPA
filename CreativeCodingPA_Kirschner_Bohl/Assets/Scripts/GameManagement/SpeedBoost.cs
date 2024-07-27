@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class SpeedBoost : MonoBehaviour
 {
-
+    // Reference to the player object
     private GameObject _player;
+
     // References the Player Controller Script
     private PlayerController _playerController;
 
@@ -30,12 +31,13 @@ public class SpeedBoost : MonoBehaviour
         boostTime = 0;
         _playerController.isBoosted = false;
     }
-       // Boost when player touches the speedboost object; also destroys it
+    
+    // Boost when player touches the speedboost object; also destroys it
     void OnTriggerEnter(Collider other)
     {
         _playerController.isBoosted = true;
         _playerController.speed = 12;
-        _player.GetComponent<AudioSource>().PlayOneShot(speedBoost);
+        _player.GetComponent<AudioSource>().PlayOneShot(speedBoost, 0.7f);
         Destroy(gameObject);
         
     }

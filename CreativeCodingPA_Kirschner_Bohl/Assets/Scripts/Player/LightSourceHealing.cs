@@ -26,11 +26,14 @@ public class LightSourceHealing : MonoBehaviour
         _damageController = _player.GetComponent<DamageController>();
     }
 
+    // As long as the player is inside the bounds of a lightsource, set bool to true in the damageController script, thereby healing the player until health is full
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject == _player)
         {
             _damageController.isInLight = true;
+
+            // make the sound only play once
             if(!_hasPlayed)
             {
                 _player.GetComponent<AudioSource>().PlayOneShot(lightSourceHeal);
@@ -46,6 +49,8 @@ public class LightSourceHealing : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // when the player leaves the lightsource: isInLight gets set to false
 
     private void OnTriggerExit(Collider other)
     {
