@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     // Turnspeed of the player character
     public float turnSpeed;
 
+    // Makes the player turn faster when not moving
+    public float turnSpeedMultiplier;
+
     // The vertical input for movement
     public float verticalInput;
 
@@ -65,7 +68,7 @@ public class PlayerController : MonoBehaviour
         {
 
         // As long as the player doesnt move vertically: Rotating the character is allowed and the rotation speed is doubled to allow for better control of the character
-        transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime * 2);
+        transform.Rotate(Vector3.up, turnAngle * turnSpeed * Time.deltaTime * turnSpeedMultiplier);
         }
 
         // If the player moves backward, then invert the turn angle
